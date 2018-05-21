@@ -10,6 +10,6 @@ namespace CareerCloud.Pocos
     [Table("Company_Jobs")]
     class CompanyJobPoco
     {
-        public Guid Id { get;set }
+        public Guid Id { get; set; }
     }
 }
