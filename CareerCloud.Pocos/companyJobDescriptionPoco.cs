@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace CareerCloud.Pocos
 {
     [Table("Company_Jobs_Descriptions")]
-    class companyJobDescriptionPoco:IPoco
+    class CompanyJobDescriptionPoco:IPoco
     {
         [Key]
         public Guid Id { get; set; }
@@ -17,8 +17,8 @@ namespace CareerCloud.Pocos
         [Column("Job_Name")]
         public string JobName { get; set; }
         [Column("Job_Descriptions")]
-        public string JobDescription { get; set; }
-        [Column("Time_stamp")]
+        public string JobDescriptions { get; set; }
+        [Column("Time_Stamp")]
         public byte[] TimeStamp { get; set; }
 
     }

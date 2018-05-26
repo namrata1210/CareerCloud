@@ -19,12 +19,12 @@ namespace CareerCloud.Pocos
          public string CertificateDiploma { get; set; }
          [Column("Start_Date")]
          public DateTime? StartDate { get; set; }
-         [Column("completion_Date")]
+         [Column("Completion_Date")]
          public DateTime? CompletionDate { get; set; }
          [Column("Completion_Percent")]
          public byte? CompletionPercent { get; set; }
-         [Column("time_Stamp")]
-         public byte[] Timestamp { get; set; }
+         [Column("Time_Stamp")]
+         public byte[] TimeStamp { get; set; }
 
 
     }

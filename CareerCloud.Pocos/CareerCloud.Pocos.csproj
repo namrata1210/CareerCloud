@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CareerCloud.Pocos</RootNamespace>
-    <AssemblyName>lican</AssemblyName>
+    <AssemblyName>CareerCloud.Pocos</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -46,9 +46,9 @@
     <Compile Include="ApplicantProfilePoco.cs" />
     <Compile Include="ApplicantResumePoco.cs" />
     <Compile Include="ApplicantSkillPoco.cs" />
-    <Compile Include="ApplicantWorkhistoryPoco.cs" />
+    <Compile Include="ApplicantWorkHistoryPoco.cs" />
     <Compile Include="CompanyDescriptionPoco.cs" />
-    <Compile Include="companyJobDescriptionPoco.cs" />
+    <Compile Include="CompanyJobDescriptionPoco.cs" />
     <Compile Include="CompanyJobEducationPoco.cs" />
     <Compile Include="CompanyJobPoco.cs" />
     <Compile Include="CompanyJobSkillPoco.cs" />
@@ -56,9 +56,9 @@
     <Compile Include="CompanyProfilePoco.cs" />
     <Compile Include="IPoco.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SecurityLoginLogPoco.cs" />
+    <Compile Include="SecurityLoginsLogPoco.cs" />
     <Compile Include="SecurityLoginPoco.cs" />
-    <Compile Include="SecurityLoginRolePoco.cs" />
+    <Compile Include="SecurityLoginsRolePoco.cs" />
     <Compile Include="SecurityRolePoco.cs" />
     <Compile Include="SystemCountryCodePoco.cs" />
     <Compile Include="SystemLanguageCodePoco.cs" />

@@ -13,8 +13,8 @@ namespace CareerCloud.Pocos
     {
         [Key]
         public Guid Id { get; set; }
-        [Column("Regestration_Date")]
-        public DateTime? RegestrationDate { get; set; }
+        [Column("Registration_Date")]
+        public DateTime RegistrationDate { get; set; }
         [Column("Company_Website")]
         public string CompanyWebsite { get; set; }
         [Column("Contact_Phone")]

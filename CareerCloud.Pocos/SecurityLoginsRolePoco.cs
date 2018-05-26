@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 namespace CareerCloud.Pocos
 {
     [Table("Security_Logins_Roles")]
-    class SecurityLoginRolePoco:IPoco
+    class SecurityLoginsRolePoco:IPoco
     {
         [Key]
         public Guid Id { get; set; }
         public Guid Login { get; set; }
         public Guid Role { get; set; }
-        [Column("Time_stamp")]
+        [Column("Time_Stamp")]
         public byte[] TimeStamp { get; set; }
 
     }

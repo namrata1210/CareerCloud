@@ -9,26 +9,26 @@ using System.Threading.Tasks;
 namespace CareerCloud.Pocos
 {
     [Table("Applicant_Profiles")]
-    class ApplicantProfilePoco:IPoco
+    class ApplicantProfilePoco : IPoco
     {
         [Key]
         public Guid Id { get; set; }
         public Guid Login { get; set; }
-        [Column("Current_salary")]
+        [Column("Current_Salary")]
         public Decimal? CurrentSalary { get; set; }
         [Column("Current_Rate")]
-        public Decimal ? CurrentRate { get; set; }
+        public Decimal? CurrentRate { get; set; }
         public string Currency { get; set; }
         [Column("Country_Code")]
-        public string CountryCode { get; set; }
+        public string Country { get; set; }
         [Column("State_Province_Code")]
-        public string StateProvinceCode { get; set; }
+        public string Province { get; set; }
         [Column("Street_Address")]
-        public string StreerAddress { get; set; }
-        [Column("City_town")]
-        public string CityTown { get; set; }
-        [Column("ZipPostalCode")]
-        public string ZipPostalCode { get; set; }
+        public string Street { get; set; }
+        [Column("City_Town")]
+        public string City { get; set; }
+        [Column("Zip_Postal_Code")]
+        public string PostalCode{ get; set; }
         [Column("Time_Stamp")]
         public Byte[] TimeStamp { get; set; }
     }

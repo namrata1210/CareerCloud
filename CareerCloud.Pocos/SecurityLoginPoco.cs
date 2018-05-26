@@ -16,15 +16,15 @@ namespace CareerCloud.Pocos
         public string Login { get; set; }
         public string Password { get; set; }
         [Column("Created_Date")]
-        public DateTime? CreatedDate { get; set; }
+        public DateTime Created { get; set; }
         [Column("Password_Update_Date")]
-        public DateTime? PasswordUpdateDate { get; set; }
+        public DateTime? PasswordUpdate{ get; set; }
         [Column("Agreement_Accepted_Date")]
-        public DateTime? AgreementAcceptedDate { get; set; }
+        public DateTime? AgreementAccepted { get; set; }
         [Column("Is_Locked")]
-        public Boolean? IsLocked { get; set; }
+        public Boolean IsLocked { get; set; }
         [Column("Is_Inactive")]
-        public Boolean? IsInactive { get; set; }
+        public Boolean IsInactive { get; set; }
         [Column("Email_Address")]
         public string EmailAddress { get; set; }
         [Column("Phone_Number")]
@@ -33,10 +33,10 @@ namespace CareerCloud.Pocos
         public string FullName { get; set; }
 
         [Column("Force_Change_Password")]
-        public Boolean? ForceChangePassword { get; set; }
+        public Boolean ForceChangePassword { get; set; }
         [Column("Prefferred_Language")]
         public string PrefferredLanguage { get; set; }
-        [Column("Time_stamp")]
+        [Column("Time_Stamp")]
         public byte[] TimeStamp { get; set; }
 
 

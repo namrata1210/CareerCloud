@@ -7,8 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CareerCloud.Pocos
-{[Table("security_Logins_Log")]
-    class SecurityLoginLogPoco:IPoco
+{[Table("Security_Logins_Log")]
+    class SecurityLoginsLogPoco:IPoco
     {
         [Key]
         public Guid Id { get; set; }
@@ -16,9 +16,9 @@ namespace CareerCloud.Pocos
         [Column("Source_IP")]
         public string SourceIP { get; set; }
         [Column("Logon_Date")]
-        public DateTime? LogonDate { get; set; }
-        [Column("Is_succesful")]
-        public Boolean? IsSuccesful { get; set; }
+        public DateTime LogonDate { get; set; }
+        [Column("Is_Succesful")]
+        public Boolean IsSuccesful { get; set; }
 
     }
 }
