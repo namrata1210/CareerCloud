@@ -8,6 +8,6 @@ namespace CareerCloud.Pocos
 {
     interface IPoco
     {
-        Guid id { get; set; }
+        Guid Id { get; set; }
     }
 }
