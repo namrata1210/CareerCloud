@@ -20,19 +20,19 @@ namespace CareerCloud.ADODataAccessLayer
                cmd.Connection = _connection;
                int  rowseffected = 0;
 
-                foreach(ApplicantEducationPoco poco in items)
+                foreach(ApplicantEducationPoco Poco in items)
                 {
                     cmd.CommandText = @"INSERT INTO [dbo].[Applicant_Educations] 
                    ([Id],[Applicant],[Major],[Certificate_Diploma],[Start_Date] ,[Completion_Date] ,[Completion_Percent])
                    Values(@Id,@Applicant,@Major,@Certificate_Diploma,@Start_Date,@Completion_Date ,@Completion_Percent)";
 
-                    cmd.Parameters.AddWithValue("@ID", poco.Id);
-                    cmd.Parameters.AddWithValue("@Applicant", poco.Applicant);
-                    cmd.Parameters.AddWithValue("@Major", poco.Major);
-                    cmd.Parameters.AddWithValue("@Certificate_Diploma",poco.CertificateDiploma);
-                    cmd.Parameters.AddWithValue("@Start_Date", poco.StartDate);
-                    cmd.Parameters.AddWithValue("@Completion_Date", poco.CompletionDate);
-                    cmd.Parameters.AddWithValue("@Completion_Percent", poco.CompletionDate);
+                    cmd.Parameters.AddWithValue("@ID", Poco.Id);
+                    cmd.Parameters.AddWithValue("@Applicant", Poco.Applicant);
+                    cmd.Parameters.AddWithValue("@Major", Poco.Major);
+                    cmd.Parameters.AddWithValue("@Certificate_Diploma",Poco.CertificateDiploma);
+                    cmd.Parameters.AddWithValue("@Start_Date", Poco.StartDate);
+                    cmd.Parameters.AddWithValue("@Completion_Date", Poco.CompletionDate);
+                    cmd.Parameters.AddWithValue("@Completion_Percent", Poco.CompletionDate);
 
                     _connection.Open();
                      rowseffected += cmd.ExecuteNonQuery();
