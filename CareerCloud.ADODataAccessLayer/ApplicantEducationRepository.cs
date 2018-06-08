@@ -104,7 +104,7 @@ namespace CareerCloud.ADODataAccessLayer
 
                 _connection.Open();
                 cmd.ExecuteNonQuery();
-                _connection.Close()
+                _connection.Close();
             };
               
         }

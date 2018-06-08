@@ -117,13 +117,13 @@ namespace CareerCloud.ADODataAccessLayer
                 {
                     cmd.CommandText= @"UPDATE Applicant_Job_Applications
                     SET 
-                    Applicant=@Applicant;
-                    Job =@Job;
-                    Application_Date=@Application_Date;
-                    Time_Stamp=@Time_Stamp;
+                    Applicant=@Applicant,
+                    Job =@Job,
+                    Application_Date=@Application_Date,
+                    Time_Stamp=@Time_Stamp,
                     WHERE ID = @ID";
 
-                    Cmd.Parameters.AddWithValue("@ID", Poco.Id);
+                    cmd.Parameters.AddWithValue("@ID", Poco.Id);
                     cmd.Parameters.AddWithValue("@Applicant", Poco.Applicant);
                     cmd.Parameters.AddWithValue("@Job", Poco.Job);
                     cmd.Parameters.AddWithValue("@Application_Date", Poco.ApplicationDate);
