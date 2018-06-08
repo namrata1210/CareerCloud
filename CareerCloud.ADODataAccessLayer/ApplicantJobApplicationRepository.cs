@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CareerCloud.ADODataAccessLayer
 {
-    class ApplicantJobApplicationRepository : BaseADO, IDataRepository<ApplicantJobApplicationPoco>
+   public  class ApplicantJobApplicationRepository : BaseADO, IDataRepository<ApplicantJobApplicationPoco>
     {
     
        public void Add(params ApplicantJobApplicationPoco[] items)
@@ -18,10 +18,10 @@ namespace CareerCloud.ADODataAccessLayer
             using (_connection)
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.Connection=_connection
-                int roweffected = 0;
+                cmd.Connection = _connection;
+                int rowseffected = 0;
 
-                foreach(ApplicantJobApplicationPoco Poco in items)
+                foreach (ApplicantJobApplicationPoco Poco in items)
                 {
                     cmd.CommandText = @"INSERT INTO [dbo].[Applicant_Job_Applications]
                     ([Id],[Applicant],[Job],[Application_Date]) values (@ID,@Applicant,@Job,@Application_Date)";
@@ -32,7 +32,7 @@ namespace CareerCloud.ADODataAccessLayer
                     cmd.Parameters.AddWithValue("@Application_Date", Poco.ApplicationDate);
 
                     _connection.Open();
-                    roweffected += cmd.ExecuteNonQuery();
+                    rowseffected += cmd.ExecuteNonQuery();
                     _connection.Close();
                 
                 }
