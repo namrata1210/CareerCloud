@@ -19,7 +19,7 @@ namespace CareerCloud.ADODataAccessLayer
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = _connection;
-            int rowseffected = 0;
+           
 
                 foreach (ApplicantProfilePoco Poco in items)
                 {
@@ -41,7 +41,7 @@ namespace CareerCloud.ADODataAccessLayer
 
 
                     _connection.Open();
-                    rowseffected += cmd.ExecuteNonQuery();
+              cmd.ExecuteNonQuery();
                     _connection.Close();
 
 
@@ -61,6 +61,7 @@ namespace CareerCloud.ADODataAccessLayer
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = _connection;
+                cmd.CommandText = "SELECT * FROM Applicant_Profiles";
                 _connection.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
                 int position = 0;
@@ -105,7 +106,7 @@ namespace CareerCloud.ADODataAccessLayer
             cmd.Connection = _connection;
             foreach (ApplicantProfilePoco Poco in items)
             {
-                cmd.CommandText = @"DELETE FROM Applicant_ProfilePoco WHERE ID = @ID";
+                cmd.CommandText = @"DELETE FROM Applicant_Profiles  WHERE ID = @ID";
 
                 _connection.Open();
                 cmd.ExecuteNonQuery();
@@ -119,10 +120,10 @@ namespace CareerCloud.ADODataAccessLayer
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = _connection;
-               int rowseffected = 0;
+   
                 foreach(ApplicantProfilePoco Poco in items)
                 {
-                    cmd.CommandText = @"UPDATE Applicant_ProfilePoco
+                    cmd.CommandText = @"UPDATE Applicant_Profile 
                     SET
                     login=@login,Current_Salary=@Current_Salary,Current_Rate=@Current_Rate,Currency=@Currency,
                     Country_Code=@Country_Code,State_Province_Code=@State_Province_Code,Street_Address=@Street_Address,
@@ -141,7 +142,7 @@ namespace CareerCloud.ADODataAccessLayer
                     cmd.Parameters.AddWithValue("@Id", Poco.Id);
 
                     _connection.Open();
-                    rowseffected += cmd.ExecuteNonQuery();
+                   cmd.ExecuteNonQuery();
                     _connection.Close();
 
 

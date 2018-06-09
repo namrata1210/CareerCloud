@@ -19,7 +19,7 @@ namespace CareerCloud.ADODataAccessLayer
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = _connection;
-                int rowseffected = 0;
+                
 
                 foreach (ApplicantResumePoco Poco in items)
                 {
@@ -32,7 +32,7 @@ namespace CareerCloud.ADODataAccessLayer
                     cmd.Parameters.AddWithValue("@Last_Updated", Poco.LastUpdated);
 
                     _connection.Open();
-                    rowseffected += cmd.ExecuteNonQuery();
+               cmd.ExecuteNonQuery();
                     _connection.Close();
                 }
             }
@@ -51,6 +51,7 @@ namespace CareerCloud.ADODataAccessLayer
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = _connection;
+                cmd.CommandText = "select * from Applicant_Resumes";
                 _connection.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
                 int position = 0;
@@ -89,7 +90,7 @@ namespace CareerCloud.ADODataAccessLayer
                 cmd.Connection = _connection;
                 foreach (ApplicantResumePoco Poco in items)
                 {
-                    cmd.CommandText = @"DELETE FROM Applicant_Resumes Poco WHERE ID= @ID";
+                    cmd.CommandText = @"DELETE FROM Applicant_Resumes  WHERE ID= @ID";
 
 
                     _connection.Open();
@@ -107,22 +108,23 @@ namespace CareerCloud.ADODataAccessLayer
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = _connection;
                 _connection.Open();
-                int rowseffected = 0;
+            
                 foreach (ApplicantResumePoco Poco in items)
                 {
-                    cmd.CommandText=@"UPDATE Applicant_Resumes Poco 
+                    cmd.CommandText = @"UPDATE Applicant_Resumes 
                      SET
                      ID=@ID,Applicant= @Applicant,Resume=@Resume,Last_Updated=@Last_Updated
-                     WHERE ID = @ID"
+                     WHERE ID = @ID";
 
 
-                    cmd.Parameters.AddWithValue("@id", Poco.Id);
+                    
                     cmd.Parameters.AddWithValue("@Applicant", Poco.Applicant);
                     cmd.Parameters.AddWithValue("@Resume", Poco.Resume);
                     cmd.Parameters.AddWithValue("@Last_Updated", Poco.LastUpdated);
+                    cmd.Parameters.AddWithValue("@id", Poco.Id);
 
                     _connection.Open();
-                    rowseffected += cmd.ExecuteNonQuery();
+                cmd.ExecuteNonQuery();
                     _connection.Close();
 
                 }

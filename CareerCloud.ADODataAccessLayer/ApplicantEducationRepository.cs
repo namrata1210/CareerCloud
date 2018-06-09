@@ -18,7 +18,7 @@ namespace CareerCloud.ADODataAccessLayer
             {
                 SqlCommand cmd = new SqlCommand();
                cmd.Connection = _connection;
-               int  rowseffected = 0;
+             
 
                 foreach(ApplicantEducationPoco Poco in items)
                 {
@@ -35,7 +35,7 @@ namespace CareerCloud.ADODataAccessLayer
                     cmd.Parameters.AddWithValue("@Completion_Percent", Poco.CompletionDate);
 
                     _connection.Open();
-                     rowseffected += cmd.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery();
                     _connection.Close();
                     }
             }
@@ -100,7 +100,7 @@ namespace CareerCloud.ADODataAccessLayer
             cmd.Connection = _connection;
             foreach(ApplicantEducationPoco Poco in items)
             {
-                cmd.CommandText = @"DELETE FROM Applicant_educations WHERE ID = @ID";
+                cmd.CommandText = @"DELETE FROM Applicant_Educations WHERE ID = @ID";
 
                 _connection.Open();
                 cmd.ExecuteNonQuery();
@@ -115,7 +115,7 @@ namespace CareerCloud.ADODataAccessLayer
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = _connection;
-                int rowseffected = 0;
+               
                 foreach(ApplicantEducationPoco Poco in items)
                 {
                     cmd.CommandText = @"UPDATE Application_Educations
@@ -138,7 +138,7 @@ namespace CareerCloud.ADODataAccessLayer
                     cmd.Parameters.AddWithValue("@ID", Poco.Id);
 
                     _connection.Open();
-                    rowseffected += cmd.ExecuteNonQuery();
+                     cmd.ExecuteNonQuery();
                     _connection.Close();
 
                 }

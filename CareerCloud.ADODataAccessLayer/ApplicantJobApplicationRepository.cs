@@ -19,7 +19,7 @@ namespace CareerCloud.ADODataAccessLayer
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = _connection;
-                int rowseffected = 0;
+               
 
                 foreach (ApplicantJobApplicationPoco Poco in items)
                 {
@@ -32,7 +32,7 @@ namespace CareerCloud.ADODataAccessLayer
                     cmd.Parameters.AddWithValue("@Application_Date", Poco.ApplicationDate);
 
                     _connection.Open();
-                    rowseffected += cmd.ExecuteNonQuery();
+                  cmd.ExecuteNonQuery();
                     _connection.Close();
                 
                 }
@@ -112,7 +112,7 @@ namespace CareerCloud.ADODataAccessLayer
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = _connection;
-                int rowseffected = 0;
+               
                 foreach(ApplicantJobApplicationPoco Poco in items)
                 {
                     cmd.CommandText= @"UPDATE Applicant_Job_Applications
@@ -123,13 +123,14 @@ namespace CareerCloud.ADODataAccessLayer
                     Time_Stamp=@Time_Stamp,
                     WHERE ID = @ID";
 
-                    cmd.Parameters.AddWithValue("@ID", Poco.Id);
+                  
                     cmd.Parameters.AddWithValue("@Applicant", Poco.Applicant);
                     cmd.Parameters.AddWithValue("@Job", Poco.Job);
                     cmd.Parameters.AddWithValue("@Application_Date", Poco.ApplicationDate);
+                    cmd.Parameters.AddWithValue("@ID", Poco.Id);
 
                     _connection.Open();
-                    rowseffected += cmd.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery();
                     _connection.Close();
 
 
