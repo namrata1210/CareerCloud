@@ -110,7 +110,7 @@ namespace CareerCloud.ADODataAccessLayer
                 _connection.Open();
                 cmd.ExecuteNonQuery();
                 _connection.Close();
-            };
+            }
         }
 
         public void Update(params ApplicantProfilePoco[] items)
