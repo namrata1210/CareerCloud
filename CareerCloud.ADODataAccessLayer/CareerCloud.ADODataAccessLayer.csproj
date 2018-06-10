@@ -48,6 +48,8 @@
     <Compile Include="ApplicantSkillRepository.cs" />
     <Compile Include="ApplicantWorkHistoryRepository.cs" />
     <Compile Include="BaseADO.cs" />
+    <Compile Include="CompanyDescriptionRepository.cs" />
+    <Compile Include="CompanyJobEducationRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

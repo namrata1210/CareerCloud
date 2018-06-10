@@ -80,7 +80,7 @@ namespace CareerCloud.ADODataAccessLayer
                 _connection.Close();
 
             }
-            return Pocos;
+            return Pocos.Where(p=>p!=null).ToList();
         }
 
         public IList<ApplicantEducationPoco> GetList(Expression<Func<ApplicantEducationPoco, bool>> where, params Expression<Func<ApplicantEducationPoco, object>>[] navigationProperties)

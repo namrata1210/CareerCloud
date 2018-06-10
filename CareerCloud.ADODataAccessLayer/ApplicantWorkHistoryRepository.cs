@@ -88,9 +88,9 @@ namespace CareerCloud.ADODataAccessLayer
                 _connection.Close();
                 
             }
-            return Pocos;
+            return Pocos.Where(p => p != null).ToList();
 
-          
+
         }
 
         public IList<ApplicantWorkHistoryPoco> GetList(Expression<Func<ApplicantWorkHistoryPoco, bool>> where, params Expression<Func<ApplicantWorkHistoryPoco, object>>[] navigationProperties)
