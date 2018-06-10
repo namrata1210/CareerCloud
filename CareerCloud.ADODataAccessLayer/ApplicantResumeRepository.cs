@@ -92,7 +92,7 @@ namespace CareerCloud.ADODataAccessLayer
                 {
                     cmd.CommandText = @"DELETE FROM Applicant_Resumes  WHERE ID= @ID";
 
-
+                    cmd.Parameters.AddWithValue("@Id", Poco.Id);
                     _connection.Open();
                     cmd.ExecuteNonQuery();
                     _connection.Close();

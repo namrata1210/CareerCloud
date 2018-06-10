@@ -92,17 +92,19 @@ namespace CareerCloud.ADODataAccessLayer
 
         public void Remove(params ApplicantJobApplicationPoco[] items)
         {
-
-            SqlCommand cmd = new SqlCommand();
-            cmd.Connection = _connection;
-            foreach (ApplicantJobApplicationPoco Poco in items)
+            using (_connection)
             {
-                cmd.CommandText = @"DELETE FROM Applicant_Job_Applications WHERE ID = @ID";
-
-                _connection.Open();
-                cmd.ExecuteNonQuery();
-                _connection.Close();
-           };
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = _connection;
+                foreach (ApplicantJobApplicationPoco Poco in items)
+                {
+                    cmd.CommandText = @"DELETE FROM Applicant_Job_Applications WHERE ID = @ID";
+                    cmd.Parameters.AddWithValue("@Id", Poco.Id);
+                    _connection.Open();
+                    cmd.ExecuteNonQuery();
+                    _connection.Close();
+                }
+            }
 
         }
 
