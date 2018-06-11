@@ -56,6 +56,7 @@
     <Compile Include="CompanyLocationRepository.cs" />
     <Compile Include="CompanyProfileRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SecurityLoginRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CareerCloud.DataAccessLayer\CareerCloud.DataAccessLayer.csproj">
