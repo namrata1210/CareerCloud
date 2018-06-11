@@ -54,6 +54,7 @@
     <Compile Include="CompanyJobSkillRepository.cs" />
     <Compile Include="CompanyJobRepository.cs" />
     <Compile Include="CompanyLocationRepository.cs" />
+    <Compile Include="CompanyProfileRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
