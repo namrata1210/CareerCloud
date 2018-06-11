@@ -10,25 +10,23 @@ using System.Threading.Tasks;
 
 namespace CareerCloud.ADODataAccessLayer
 {
-    class SecurityLoginRoleRepository : BaseADO, IDataRepository<SecurityLoginsRolePoco>
+    class SecurityRoleRepository : BaseADO, IDataRepository<SecurityRolePoco>
     {
-        public void Add(params SecurityLoginsRolePoco[] items)
+        public void Add(params SecurityRolePoco[] items)
         {
             using (_connection)
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = _connection;
 
-                foreach (SecurityLoginsRolePoco Poco in items)
+                foreach(SecurityRolePoco Poco in items)
                 {
-                    cmd.CommandText = @"INSERT INTO [dbo].[Security_Logins_Roles]
-                      ([Id],[Login],[Role]) 
-                        Values(@Id,@Login,@Role)";
-
+                    cmd.CommandText = @"INSERT INTO [dbo].[Security_Roles]
+                    ([Id],[Role],[Is_Inactive])
+                     Values (@Id,@Role,@Is_Inactive)";
                     cmd.Parameters.AddWithValue("@Id", Poco.Id);
-                    cmd.Parameters.AddWithValue("@Login", Poco.Login);
                     cmd.Parameters.AddWithValue("@Role", Poco.Role);
-
+                    cmd.Parameters.AddWithValue("@Is_Inactive", Poco.IsInactive);
 
                     _connection.Open();
                     cmd.ExecuteNonQuery();
@@ -42,57 +40,54 @@ namespace CareerCloud.ADODataAccessLayer
             throw new NotImplementedException();
         }
 
-        public IList<SecurityLoginsRolePoco> GetAll(params Expression<Func<SecurityLoginsRolePoco, object>>[] navigationProperties)
+        public IList<SecurityRolePoco> GetAll(params Expression<Func<SecurityRolePoco, object>>[] navigationProperties)
         {
-            SecurityLoginsRolePoco[] Pocos = new SecurityLoginsRolePoco[1000];
+            SecurityRolePoco[] Pocos = new SecurityRolePoco[1000];
             using (_connection)
             {
+
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = _connection;
-                cmd.CommandText = @"SELECT * FROM Security_Logins__Roles";
+                cmd.CommandText = @"SELECT * FROM Security_Roles";
                 _connection.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 int position = 0;
                 while (reader.Read())
                 {
-                    SecurityLoginsRolePoco Poco = new SecurityLoginsRolePoco();
+                    SecurityRolePoco Poco = new SecurityRolePoco();
                     Poco.Id = reader.GetGuid(0);
-                    Poco.Login = reader.GetGuid(1);
-                    Poco.Role = reader.GetGuid(2);
-                    Poco.TimeStamp = (byte[])reader[3];
+                    Poco.Role = reader.GetString(1);
+                    Poco.IsInactive = reader.GetBoolean(2);
 
                     Pocos[position] = Poco;
                     position++;
                 }
                 _connection.Close();
-
             }
             return Pocos.Where(p => p != null).ToList();
         }
 
-
-
-        public IList<SecurityLoginsRolePoco> GetList(Expression<Func<SecurityLoginsRolePoco, bool>> where, params Expression<Func<SecurityLoginsRolePoco, object>>[] navigationProperties)
+        public IList<SecurityRolePoco> GetList(Expression<Func<SecurityRolePoco, bool>> where, params Expression<Func<SecurityRolePoco, object>>[] navigationProperties)
         {
             throw new NotImplementedException();
         }
 
-        public SecurityLoginsRolePoco GetSingle(Expression<Func<SecurityLoginsRolePoco, bool>> where, params Expression<Func<SecurityLoginsRolePoco, object>>[] navigationProperties)
+        public SecurityRolePoco GetSingle(Expression<Func<SecurityRolePoco, bool>> where, params Expression<Func<SecurityRolePoco, object>>[] navigationProperties)
         {
-            IQueryable<SecurityLoginsRolePoco> pocos = GetAll().AsQueryable();
+            IQueryable<SecurityRolePoco> pocos = GetAll().AsQueryable();
             return pocos.Where(where).FirstOrDefault();
         }
 
-        public void Remove(params SecurityLoginsRolePoco[] items)
+        public void Remove(params SecurityRolePoco[] items)
         {
-            using (_connection)
+            using(_connection)
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = _connection;
-                foreach (SecurityLoginsRolePoco Poco in items)
+                foreach (SecurityRolePoco Poco in items)
                 {
-                    cmd.CommandText = @"DELETE FROM Security_Logins_Roles WHERE ID = @ID";
+                    cmd.CommandText = @"DELETE FROM Security_Roles WHERE ID = @ID";
 
                     cmd.Parameters.AddWithValue("@Id", Poco.Id);
                     _connection.Open();
@@ -102,7 +97,7 @@ namespace CareerCloud.ADODataAccessLayer
             }
         }
 
-        public void Update(params SecurityLoginsRolePoco[] items)
+        public void Update(params SecurityRolePoco[] items)
         {
 
             using (_connection)
@@ -110,16 +105,15 @@ namespace CareerCloud.ADODataAccessLayer
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = _connection;
 
-                foreach (SecurityLoginsRolePoco Poco in items)
+                foreach (SecurityRolePoco Poco in items)
                 {
-                    cmd.CommandText = @"UPDATE Security_Logins_Roles
-                     SET  Login=@Login,Role=@Role
-                     WHERE Id=@Id";
+                    cmd.CommandText = @"UPDATE FROM Security_Roles
+                     SET Role=@Role,Is_Inactive=@Is_Inactive
+                      WHERE Id=@Id";
 
-                    cmd.Parameters.AddWithValue("@Login", Poco.Login);
                     cmd.Parameters.AddWithValue("@Role", Poco.Role);
+                    cmd.Parameters.AddWithValue("@Is_Inactive", Poco.IsInactive);
                     cmd.Parameters.AddWithValue("@Id", Poco.Id);
-
                     _connection.Open();
                     cmd.ExecuteNonQuery();
                     _connection.Close();
@@ -128,5 +122,3 @@ namespace CareerCloud.ADODataAccessLayer
         }
     }
 }
-    
-

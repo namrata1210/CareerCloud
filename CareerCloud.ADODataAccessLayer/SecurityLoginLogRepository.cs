@@ -19,7 +19,7 @@ namespace CareerCloud.ADODataAccessLayer
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = _connection;
 
-                foreach(SecurityLoginsLogPoco Poco in items)
+                foreach (SecurityLoginsLogPoco Poco in items)
                 {
                     cmd.CommandText = @"INSERT INTO [dbo].[Security_Logins_Log]
                     ([Id],[Login] ,[Source_IP],[Logon_Date],[Is_Succesful])
@@ -36,7 +36,7 @@ namespace CareerCloud.ADODataAccessLayer
                     _connection.Close();
 
 
-                   
+
 
                 }
             }
@@ -59,7 +59,7 @@ namespace CareerCloud.ADODataAccessLayer
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 int position = 0;
-                while(reader.Read())
+                while (reader.Read())
 
                 {
                     SecurityLoginsLogPoco Poco = new SecurityLoginsLogPoco();
@@ -134,5 +134,11 @@ namespace CareerCloud.ADODataAccessLayer
                     cmd.ExecuteNonQuery();
                     _connection.Close();
                 }
+
+
+            }
+        }
     }
 }
+    
+
