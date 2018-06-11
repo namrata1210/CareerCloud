@@ -60,6 +60,8 @@
     <Compile Include="SecurityLoginRepository.cs" />
     <Compile Include="SecurityLoginRoleRepository.cs" />
     <Compile Include="SecurityRoleRepository.cs" />
+    <Compile Include="SystemCountryCodeRepository.cs" />
+    <Compile Include="SystemLanguageCodeRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CareerCloud.DataAccessLayer\CareerCloud.DataAccessLayer.csproj">
