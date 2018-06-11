@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace CareerCloud.ADODataAccessLayer
 {
-    class CompanyLocationRepository : BaseADO, IDataRepository<CompanyLocationPoco>
+ public   class CompanyLocationRepository : BaseADO, IDataRepository<CompanyLocationPoco>
     {
-        private object poco;
+       
 
         public void Add(params CompanyLocationPoco[] items)
         {

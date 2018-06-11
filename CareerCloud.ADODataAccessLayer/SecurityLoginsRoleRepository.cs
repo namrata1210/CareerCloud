@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CareerCloud.ADODataAccessLayer
 {
-    class SecurityLoginRoleRepository : BaseADO, IDataRepository<SecurityLoginsRolePoco>
+   public class SecurityLoginsRoleRepository : BaseADO, IDataRepository<SecurityLoginsRolePoco>
     {
         public void Add(params SecurityLoginsRolePoco[] items)
         {

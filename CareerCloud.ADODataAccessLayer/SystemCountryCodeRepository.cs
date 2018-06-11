@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CareerCloud.ADODataAccessLayer
 {
-    class SystemCountryCodeRepository : BaseADO, IDataRepository<SystemCountryCodePoco>
+    public class SystemCountryCodeRepository : BaseADO, IDataRepository<SystemCountryCodePoco>
     {
         public void Add(params SystemCountryCodePoco[] items)
         {

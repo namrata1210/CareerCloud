@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CareerCloud.ADODataAccessLayer
 {
-    class CompanyDescriptionRepository : BaseADO, IDataRepository<CompanyDescriptionPoco>
+ public   class CompanyDescriptionRepository : BaseADO, IDataRepository<CompanyDescriptionPoco>
 
     {
         public CompanyDescriptionPoco poco { get; private set; }
