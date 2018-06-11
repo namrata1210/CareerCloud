@@ -63,7 +63,7 @@ namespace CareerCloud.ADODataAccessLayer
                     Poco.ProfileCreated = reader.GetDateTime(2);
                     Poco.IsInactive = reader.GetBoolean(3);
                     Poco.IsCompanyHidden = reader.GetBoolean(4);
-                    Poco.TimeStamp = (byte[])reader[5];
+                    Poco.TimeStamp = reader.IsDBNull(5)?null:(byte[])reader[5];
 
                     Pocos[position] = Poco;
                     position++;

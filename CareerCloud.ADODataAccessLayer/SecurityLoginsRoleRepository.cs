@@ -60,7 +60,7 @@ namespace CareerCloud.ADODataAccessLayer
                     Poco.Id = reader.GetGuid(0);
                     Poco.Login = reader.GetGuid(1);
                     Poco.Role = reader.GetGuid(2);
-                    Poco.TimeStamp = (byte[])reader[3];
+                    Poco.TimeStamp =reader.IsDBNull(3)?null: (byte[])reader[3];
 
                     Pocos[position] = Poco;
                     position++;

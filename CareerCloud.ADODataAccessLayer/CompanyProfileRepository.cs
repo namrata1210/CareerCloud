@@ -63,11 +63,11 @@ namespace CareerCloud.ADODataAccessLayer
                     CompanyProfilePoco Poco = new CompanyProfilePoco();
                     Poco.Id = reader.GetGuid(0);
                     Poco.RegistrationDate = reader.GetDateTime(1);
-                    Poco.CompanyWebsite = reader.GetString(2);
+                    Poco.CompanyWebsite =reader.IsDBNull(2)?null:reader.GetString(2);
                     Poco.ContactPhone = reader.GetString(3);
-                    Poco.ContactName = reader.GetString(4);
-                    Poco.CompanyLogo = (byte[])reader[5];
-                    Poco.TimeStamp = (byte[])reader[6];
+                    Poco.ContactName = reader.IsDBNull(4)?null:reader.GetString(4);
+                    Poco.CompanyLogo = reader.IsDBNull(5)?null:(byte[])reader[5];
+                    Poco.TimeStamp = reader.IsDBNull(6)?null:(byte[])reader[6];
 
                     Pocos[position] = Poco;
                     position++;

@@ -67,9 +67,10 @@ namespace CareerCloud.ADODataAccessLayer
                     Poco.Applicant = reader.GetGuid(1);
                     Poco.Major = reader.GetString(2);
                     Poco.CertificateDiploma = reader.GetString(3);
-                    Poco.StartDate = (DateTime?)reader[4];
-                    Poco.CompletionDate = (DateTime?)reader[5];
-                    Poco.CompletionPercent = (byte?)reader[6];
+                    Poco.StartDate = reader.IsDBNull(4) ? (DateTime?)null : (DateTime)reader[4];
+
+                    Poco.CompletionDate = reader.IsDBNull(5) ? (DateTime?)null : (DateTime)reader[5];
+                    Poco.CompletionPercent = reader.IsDBNull(6)?(byte?)null:(byte)reader[6];
                     Poco.TimeStamp = (byte[])reader[7];
 
                     Pocos[position] = Poco;

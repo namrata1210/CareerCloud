@@ -70,14 +70,14 @@ namespace CareerCloud.ADODataAccessLayer
                     ApplicantProfilePoco poco = new ApplicantProfilePoco();
                     poco.Id = reader.GetGuid(0);
                     poco.Login = reader.GetGuid(1);
-                    poco.CurrentSalary = (decimal?)reader[2]; 
-                    poco.CurrentRate = (decimal?)reader[3];
-                    poco.Currency = reader.GetString(4);
-                    poco.Country = reader.GetString(5);
-                    poco.Province = reader.GetString(6);
-                    poco.Street = reader.GetString(7);
-                    poco.City = reader.GetString(8);
-                    poco.PostalCode = reader.GetString(9);
+                    poco.CurrentSalary = reader.IsDBNull(2) ? (decimal?)null : (decimal)reader[2]; 
+                    poco.CurrentRate = reader.IsDBNull(3)?(decimal?)null:(decimal)reader[3];
+                    poco.Currency = reader.IsDBNull(4)?null:reader.GetString(4);
+                    poco.Country = reader.IsDBNull(5)?null:reader.GetString(5);
+                    poco.Province = reader.IsDBNull(6)?null:reader.GetString(6);
+                    poco.Street = reader.IsDBNull(7)?null:reader.GetString(7);
+                    poco.City = reader.IsDBNull(8)?null:reader.GetString(8);
+                    poco.PostalCode = reader.IsDBNull(9)?null:reader.GetString(9);
                     poco.TimeStamp = (byte[])reader[10];
 
                     pocos[position] = poco;

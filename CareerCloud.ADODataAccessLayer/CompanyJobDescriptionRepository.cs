@@ -64,9 +64,9 @@ namespace CareerCloud.ADODataAccessLayer
                     CompanyJobDescriptionPoco Poco = new CompanyJobDescriptionPoco();
                     Poco.Id = reader.GetGuid(0);
                     Poco.Job = reader.GetGuid(1);
-                    Poco.JobName = reader.GetString(2);
-                    Poco.JobDescriptions = reader.GetString(3);
-                    Poco.TimeStamp = (byte[])reader[4];
+                    Poco.JobName =reader.IsDBNull(2)?null: reader.GetString(2);
+                    Poco.JobDescriptions = reader.IsDBNull(3)?null:reader.GetString(3);
+                    Poco.TimeStamp = reader.IsDBNull(4)?null:(byte[])reader[4];
 
                     Pocos[position] = Poco;
                     position++;

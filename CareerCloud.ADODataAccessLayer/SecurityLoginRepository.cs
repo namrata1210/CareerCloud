@@ -74,15 +74,15 @@ namespace CareerCloud.ADODataAccessLayer
                     Poco.Login = reader.GetString(1);
                     Poco.Password = reader.GetString(2);
                     Poco.Created = reader.GetDateTime(3);
-                    Poco.PasswordUpdate = (DateTime?)reader[4];
-                    Poco.AgreementAccepted = (DateTime?)reader[5];
+                    Poco.PasswordUpdate = reader.IsDBNull(4)?(DateTime?)null:(DateTime)reader[4];
+                    Poco.AgreementAccepted = reader.IsDBNull(5) ? (DateTime?)null : (DateTime)reader[5];
                     Poco.IsLocked = reader.GetBoolean(6);
                     Poco.IsInactive = reader.GetBoolean(7);
                     Poco.EmailAddress = reader.GetString(8);
-                    Poco.PhoneNumber = reader.GetString(9);
-                    Poco.FullName = reader.GetString(10);
+                    Poco.PhoneNumber = reader.IsDBNull(9)?null:reader.GetString(9);
+                    Poco.FullName =reader.IsDBNull(10)?null: reader.GetString(10);
                     Poco.ForceChangePassword = reader.GetBoolean(11);
-                    Poco.PrefferredLanguage = reader.GetString(12);
+                    Poco.PrefferredLanguage = reader.IsDBNull(12)?null:reader.GetString(12);
                     Poco.TimeStamp = (byte[])reader[13];
 
 
