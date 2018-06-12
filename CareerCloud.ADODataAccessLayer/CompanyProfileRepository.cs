@@ -15,10 +15,11 @@ namespace CareerCloud.ADODataAccessLayer
     {
         public void Add(params CompanyProfilePoco[] items)
         {
-            using (_connection)
+            SqlConnection Connection = new SqlConnection(_Connstring);
+            using (Connection)
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.Connection = _connection;
+                cmd.Connection = Connection;
 
                 foreach(CompanyProfilePoco Poco in items)
                 {
@@ -33,9 +34,9 @@ namespace CareerCloud.ADODataAccessLayer
                     cmd.Parameters.AddWithValue("@Contact_Name", Poco.ContactName);
                     cmd.Parameters.AddWithValue("@Company_Logo", Poco.CompanyLogo);
 
-                    _connection.Open();
+                    Connection.Open();
                     cmd.ExecuteNonQuery();
-                    _connection.Close();
+                    Connection.Close();
 
                 }
             }
@@ -49,12 +50,13 @@ namespace CareerCloud.ADODataAccessLayer
         public IList<CompanyProfilePoco> GetAll(params Expression<Func<CompanyProfilePoco, object>>[] navigationProperties)
         {
             CompanyProfilePoco[] Pocos = new CompanyProfilePoco[1000];
-            using (_connection)
+            SqlConnection Connection = new SqlConnection(_Connstring);
+            using (Connection)
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.Connection = _connection;
+                cmd.Connection = Connection;
                 cmd.CommandText = @"SELECT * FROM Comapny_Profiles";
-                _connection.Open();
+                Connection.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 int position = 0;
@@ -72,7 +74,7 @@ namespace CareerCloud.ADODataAccessLayer
                     Pocos[position] = Poco;
                     position++;
                 }
-                _connection.Close();
+                Connection.Close();
                     
             }
             return Pocos.Where(p => p != null).ToList();
@@ -91,28 +93,30 @@ namespace CareerCloud.ADODataAccessLayer
 
         public void Remove(params CompanyProfilePoco[] items)
         {
-            using (_connection)
+            SqlConnection Connection = new SqlConnection(_Connstring);
+            using (Connection)
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.Connection = _connection;
+                cmd.Connection = Connection;
                 foreach (CompanyProfilePoco Poco in items)
                 {
                     cmd.CommandText = @"DELETE FROM Company_Profiles WHERE ID = @ID";
 
                     cmd.Parameters.AddWithValue("@Id", Poco.Id);
-                    _connection.Open();
+                    Connection.Open();
                     cmd.ExecuteNonQuery();
-                    _connection.Close();
+                    Connection.Close();
                 }
             }
         }
 
         public void Update(params CompanyProfilePoco[] items)
         {
-            using (_connection)
+            SqlConnection Connection = new SqlConnection(_Connstring);
+            using (Connection)
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.Connection = _connection;
+                cmd.Connection = Connection;
                 foreach(CompanyProfilePoco Poco in items)
                 {
                     cmd.CommandText = @"UPDATE Company_Profiles
@@ -131,9 +135,9 @@ namespace CareerCloud.ADODataAccessLayer
                     cmd.Parameters.AddWithValue("@Id", Poco.Id);
 
 
-                    _connection.Open();
+                    Connection.Open();
                     cmd.ExecuteNonQuery();
-                    _connection.Close();
+                    Connection.Close();
                 }
             }
         }

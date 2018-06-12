@@ -14,10 +14,11 @@ namespace CareerCloud.ADODataAccessLayer
     {
         public void Add(params SystemCountryCodePoco[] items)
         {
-            using (_connection)
+            SqlConnection Connection = new SqlConnection(_Connstring);
+            using (Connection)
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.Connection = _connection;
+                cmd.Connection =Connection;
                 foreach(SystemCountryCodePoco Poco in items)
                 {
                     cmd.CommandText = @"INSERT INTO [dbo].[System_Country_Codes]
@@ -29,9 +30,9 @@ namespace CareerCloud.ADODataAccessLayer
 
 
 
-                    _connection.Open();
+                    Connection.Open();
                     cmd.ExecuteNonQuery();
-                    _connection.Close();
+                    Connection.Close();
 
 
 
@@ -47,12 +48,13 @@ namespace CareerCloud.ADODataAccessLayer
         public IList<SystemCountryCodePoco> GetAll(params Expression<Func<SystemCountryCodePoco, object>>[] navigationProperties)
         {
             SystemCountryCodePoco[] Pocos = new SystemCountryCodePoco[1000];
-            using (_connection)
+            SqlConnection Connection = new SqlConnection(_Connstring);
+            using (Connection)
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.Connection = _connection;
+                cmd.Connection = Connection;
                 cmd.CommandText = @"SELECT * FROM System_Country_Codes";
-                _connection.Open();
+                Connection.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 int position = 0;
@@ -66,7 +68,7 @@ namespace CareerCloud.ADODataAccessLayer
                     Pocos[position] = Poco;
                     position++;
                 }
-                _connection.Close();
+                Connection.Close();
             }
             return Pocos.Where(p => p != null).ToList();
 
@@ -89,29 +91,30 @@ namespace CareerCloud.ADODataAccessLayer
 
         public void Remove(params SystemCountryCodePoco[] items)
         {
-
-            using (_connection)
+            SqlConnection Connection = new SqlConnection(_Connstring);
+            using (Connection)
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.Connection = _connection;
+                cmd.Connection = Connection;
                 foreach (SystemCountryCodePoco Poco in items)
                 {
                     cmd.CommandText = @"DELETE FROM System_Country_Codes WHERE Code=@Code";
 
                     cmd.Parameters.AddWithValue("@Code",Poco.Code);
-                    _connection.Open();
+                    Connection.Open();
                     cmd.ExecuteNonQuery();
-                    _connection.Close();
+                    Connection.Close();
                 }
             }
         }
 
         public void Update(params SystemCountryCodePoco[] items)
         {
-            using (_connection)
+            SqlConnection Connection = new SqlConnection(_Connstring);
+            using (Connection)
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.Connection = _connection;
+                cmd.Connection = Connection;
                 foreach (SystemCountryCodePoco Poco in items)
                 {
                     cmd.CommandText = @"UPDATE FROM System_Country_Codes
@@ -122,9 +125,9 @@ namespace CareerCloud.ADODataAccessLayer
                     cmd.Parameters.AddWithValue("@Code", Poco.Code);
 
 
-                    _connection.Open();
+                    Connection.Open();
                     cmd.ExecuteNonQuery();
-                    _connection.Close();
+                    Connection.Close();
 
 
 

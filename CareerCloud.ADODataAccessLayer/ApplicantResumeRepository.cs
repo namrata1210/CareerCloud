@@ -15,10 +15,12 @@ namespace CareerCloud.ADODataAccessLayer
     {
         public void Add(params ApplicantResumePoco[] items)
         {
-            using (_connection)
+            SqlConnection Connection = new SqlConnection(_Connstring);
+
+            using (Connection)
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.Connection = _connection;
+                cmd.Connection = Connection;
                 
 
                 foreach (ApplicantResumePoco Poco in items)
@@ -31,9 +33,9 @@ namespace CareerCloud.ADODataAccessLayer
                     cmd.Parameters.AddWithValue("@Resume", Poco.Resume);
                     cmd.Parameters.AddWithValue("@Last_Updated", Poco.LastUpdated);
 
-                    _connection.Open();
+                    Connection.Open();
                cmd.ExecuteNonQuery();
-                    _connection.Close();
+                    Connection.Close();
                 }
             }
                
@@ -47,12 +49,14 @@ namespace CareerCloud.ADODataAccessLayer
         public IList<ApplicantResumePoco> GetAll(params Expression<Func<ApplicantResumePoco, object>>[] navigationProperties)
         {
             ApplicantResumePoco[] Pocos = new ApplicantResumePoco[1000];
-            using (_connection)
+            SqlConnection Connection = new SqlConnection(_Connstring);
+
+            using (Connection)
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.Connection = _connection;
+                cmd.Connection = Connection;
                 cmd.CommandText = "select * from Applicant_Resumes";
-                _connection.Open();
+                Connection.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
                 int position = 0;
                 while(reader.Read())
@@ -66,7 +70,7 @@ namespace CareerCloud.ADODataAccessLayer
                     Pocos[position] = Poco;
                     position++;
                 }
-                _connection.Close();
+                Connection.Close();
             }
             return Pocos.Where(p => p != null).ToList();
         }
@@ -84,18 +88,20 @@ namespace CareerCloud.ADODataAccessLayer
 
         public void Remove(params ApplicantResumePoco[] items)
         {
-            using (_connection)
+            SqlConnection Connection = new SqlConnection(_Connstring);
+
+            using (Connection)
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.Connection = _connection;
+                cmd.Connection = Connection;
                 foreach (ApplicantResumePoco Poco in items)
                 {
                     cmd.CommandText = @"DELETE FROM Applicant_Resumes  WHERE ID= @ID";
 
                     cmd.Parameters.AddWithValue("@Id", Poco.Id);
-                    _connection.Open();
+                    Connection.Open();
                     cmd.ExecuteNonQuery();
-                    _connection.Close();
+                    Connection.Close();
                    
                 }
             }
@@ -103,11 +109,13 @@ namespace CareerCloud.ADODataAccessLayer
 
         public void Update(params ApplicantResumePoco[] items)
         {
-            using (_connection)
+            SqlConnection Connection = new SqlConnection(_Connstring);
+
+            using (Connection)
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.Connection = _connection;
-                _connection.Open();
+                cmd.Connection = Connection;
+              
             
                 foreach (ApplicantResumePoco Poco in items)
                 {
@@ -123,9 +131,9 @@ namespace CareerCloud.ADODataAccessLayer
                     cmd.Parameters.AddWithValue("@Last_Updated", Poco.LastUpdated);
                     cmd.Parameters.AddWithValue("@id", Poco.Id);
 
-                    _connection.Open();
+                    Connection.Open();
                 cmd.ExecuteNonQuery();
-                    _connection.Close();
+                    Connection.Close();
 
                 }
             }

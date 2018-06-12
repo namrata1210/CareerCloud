@@ -11,11 +11,11 @@ namespace CareerCloud.ADODataAccessLayer
    
     public abstract class BaseADO
     {
-        protected readonly SqlConnection _connection;
+        protected readonly string _Connstring;
 
         public BaseADO()
         {
-            _connection = new SqlConnection(ConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString);
+            _Connstring = ConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString;
         }
 
 

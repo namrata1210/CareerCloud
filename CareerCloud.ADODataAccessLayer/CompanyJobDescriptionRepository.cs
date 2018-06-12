@@ -15,10 +15,12 @@ namespace CareerCloud.ADODataAccessLayer
     {
         public void Add(params CompanyJobDescriptionPoco[] items)
         {
-            using (_connection)
+            SqlConnection Connection = new SqlConnection(_Connstring);
+
+            using (Connection)
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.Connection = _connection;
+                cmd.Connection = Connection;
 
                 foreach(CompanyJobDescriptionPoco Poco in items)
                 {
@@ -29,12 +31,12 @@ namespace CareerCloud.ADODataAccessLayer
                     cmd.Parameters.AddWithValue("@Id", Poco.Id);
                     cmd.Parameters.AddWithValue("@Job", Poco.Job);
                     cmd.Parameters.AddWithValue("@Job_Name", Poco.JobName);
-                    cmd.Parameters.AddWithValue("@Job_Description", Poco.JobDescriptions);
+                    cmd.Parameters.AddWithValue("@Job_Descriptions", Poco.JobDescriptions);
 
 
-                    _connection.Open();
+                    Connection.Open();
                     cmd.ExecuteNonQuery();
-                    _connection.Close();
+                    Connection.Close();
 
 
 
@@ -51,12 +53,14 @@ namespace CareerCloud.ADODataAccessLayer
         public IList<CompanyJobDescriptionPoco> GetAll(params Expression<Func<CompanyJobDescriptionPoco, object>>[] navigationProperties)
         {
             CompanyJobDescriptionPoco[] Pocos = new CompanyJobDescriptionPoco[1000];
-            using (_connection)
+            SqlConnection Connection = new SqlConnection(_Connstring);
+
+            using (Connection)
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.Connection = _connection;
-                cmd.CommandText = @"select * FROM CompanyJobDescription";
-                _connection.Open();
+                cmd.Connection = Connection;
+                cmd.CommandText = @"select * FROM Company_Jobs_Descriptions";
+                Connection.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
                 int position = 0;
                 while(reader.Read())
@@ -72,7 +76,7 @@ namespace CareerCloud.ADODataAccessLayer
                     position++;
 
                 }
-                _connection.Close();
+                Connection.Close();
                 
             }
             return Pocos.Where(p => p != null).ToList();
@@ -91,33 +95,37 @@ namespace CareerCloud.ADODataAccessLayer
 
         public void Remove(params CompanyJobDescriptionPoco[] items)
         {
-            using (_connection)
+            SqlConnection Connection = new SqlConnection(_Connstring);
+
+            using (Connection)
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.Connection = _connection;
+                cmd.Connection = Connection;
                 foreach (CompanyJobDescriptionPoco Poco in items)
                 {
-                    cmd.CommandText = @"DELETE FROM CompanyJobDescription WHERE @ID=ID";
+                    cmd.CommandText = @"DELETE FROM Company_Jobs_Descriptions WHERE @ID=ID";
                     cmd.Parameters.AddWithValue("@Id", Poco.Id);
-                    _connection.Open();
+                    Connection.Open();
                     cmd.ExecuteNonQuery();
-                    _connection.Close();
+                    Connection.Close();
                 }
             }
         }
 
         public void Update(params CompanyJobDescriptionPoco[] items)
         {
-            using (_connection)
+            SqlConnection Connection = new SqlConnection(_Connstring);
+
+            using (Connection)
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.Connection = _connection;
+                cmd.Connection = Connection;
 
                 foreach(CompanyJobDescriptionPoco Poco in items)
                 {
-                    cmd.CommandText = @"UPDATE CompanyJobDescription
+                    cmd.CommandText = @"UPDATE Company_Job_Descriptions
                     SET 
-                      Job=@Job,Job_Name=@Job_Name,Job_Description=@Job_Description
+                      Job=@Job,Job_Name=@Job_Name,Jobs_Description=@Job_Description
                        WHERE Id=@Id";
 
 
@@ -129,9 +137,9 @@ namespace CareerCloud.ADODataAccessLayer
                     cmd.Parameters.AddWithValue("@Job_Description", Poco.JobDescriptions);
                     cmd.Parameters.AddWithValue("@Id", Poco.Id);
 
-                    _connection.Open();
+                    Connection.Open();
                     cmd.ExecuteNonQuery();
-                    _connection.Close();
+                    Connection.Close();
 
                 }
             }

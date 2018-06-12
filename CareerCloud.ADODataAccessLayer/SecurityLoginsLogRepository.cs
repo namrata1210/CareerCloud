@@ -14,10 +14,11 @@ namespace CareerCloud.ADODataAccessLayer
     {
         public void Add(params SecurityLoginsLogPoco[] items)
         {
-            using (_connection)
+            SqlConnection Connection = new SqlConnection(_Connstring);
+            using (Connection)
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.Connection = _connection;
+                cmd.Connection = Connection;
 
                 foreach (SecurityLoginsLogPoco Poco in items)
                 {
@@ -31,9 +32,9 @@ namespace CareerCloud.ADODataAccessLayer
                     cmd.Parameters.AddWithValue("@Logon_Date", Poco.LogonDate);
                     cmd.Parameters.AddWithValue("@Is_Succesful", Poco.IsSuccesful);
 
-                    _connection.Open();
+                    Connection.Open();
                     cmd.ExecuteNonQuery();
-                    _connection.Close();
+                    Connection.Close();
 
 
 
@@ -50,12 +51,13 @@ namespace CareerCloud.ADODataAccessLayer
         public IList<SecurityLoginsLogPoco> GetAll(params Expression<Func<SecurityLoginsLogPoco, object>>[] navigationProperties)
         {
             SecurityLoginsLogPoco[] Pocos = new SecurityLoginsLogPoco[1000];
-            using (_connection)
+            SqlConnection Connection = new SqlConnection(_Connstring);
+            using (Connection)
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.Connection = _connection;
+                cmd.Connection = Connection;
                 cmd.CommandText = @"SELECT * FROM Security_Logins_Log";
-                _connection.Open();
+                Connection.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 int position = 0;
@@ -72,7 +74,7 @@ namespace CareerCloud.ADODataAccessLayer
                     Pocos[position] = Poco;
                     position++;
                 }
-                _connection.Close();
+                Connection.Close();
 
             }
             return Pocos.Where(p => p != null).ToList();
@@ -91,28 +93,30 @@ namespace CareerCloud.ADODataAccessLayer
 
         public void Remove(params SecurityLoginsLogPoco[] items)
         {
-            using (_connection)
+            SqlConnection Connection = new SqlConnection(_Connstring);
+            using (Connection)
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.Connection = _connection;
+                cmd.Connection = Connection;
                 foreach (SecurityLoginsLogPoco Poco in items)
                 {
                     cmd.CommandText = @"DELETE FROM Security_Logins_Log WHERE ID = @ID";
 
                     cmd.Parameters.AddWithValue("@Id", Poco.Id);
-                    _connection.Open();
+                    Connection.Open();
                     cmd.ExecuteNonQuery();
-                    _connection.Close();
+                    Connection.Close();
                 }
             }
         }
 
         public void Update(params SecurityLoginsLogPoco[] items)
         {
-            using (_connection)
+            SqlConnection Connection = new SqlConnection(_Connstring);
+            using (Connection)
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.Connection = _connection;
+                cmd.Connection = Connection;
 
                 foreach (SecurityLoginsLogPoco Poco in items)
                 {
@@ -130,9 +134,9 @@ namespace CareerCloud.ADODataAccessLayer
                     cmd.Parameters.AddWithValue("@Id", Poco.Id);
 
 
-                    _connection.Open();
+                    Connection.Open();
                     cmd.ExecuteNonQuery();
-                    _connection.Close();
+                    Connection.Close();
                 }
 
 

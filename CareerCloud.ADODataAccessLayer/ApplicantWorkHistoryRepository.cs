@@ -15,17 +15,18 @@ namespace CareerCloud.ADODataAccessLayer
     {
         public void Add(params ApplicantWorkHistoryPoco[] items)
         {
-            using (_connection)
+            SqlConnection Connection = new SqlConnection(_Connstring);
+            using (Connection)
             {
                 SqlCommand cmd = new SqlCommand();
-                    cmd.Connection = _connection;
+                    cmd.Connection = Connection;
        
 
                 foreach(ApplicantWorkHistoryPoco Poco in items)
                 {
                     cmd.CommandText = @"INSERT INTO [dbo].[Applicant_Work_History]
            ([Id],[Applicant] ,[Company_Name],[Country_Code],[Location],[Job_Title],[Job_Description],[Start_Month],[Start_Year],[End_Month],[End_Year])
-           Values(@Id,@Applicant,@Company_Name,@Country_Code,@Location,@Job_Title,@Job_Description,@Start_Month,@Start_Year,@End_Month,@End_Year,@Time_Stamp)";
+           Values(@Id,@Applicant,@Company_Name,@Country_Code,@Location,@Job_Title,@Job_Description,@Start_Month,@Start_Year,@End_Month,@End_Year)";
 
                     cmd.Parameters.AddWithValue("@ID", Poco.Id);
                     cmd.Parameters.AddWithValue("@Applicant", Poco.Applicant);
@@ -39,9 +40,9 @@ namespace CareerCloud.ADODataAccessLayer
                     cmd.Parameters.AddWithValue("@End_Month", Poco.EndMonth);
                     cmd.Parameters.AddWithValue("@End_Year", Poco.EndYear);
 
-                    _connection.Open();
+                    Connection.Open();
                     cmd.ExecuteNonQuery();
-                    _connection.Close();
+                    Connection.Close();
                     
                 }
 
@@ -56,12 +57,14 @@ namespace CareerCloud.ADODataAccessLayer
         public IList<ApplicantWorkHistoryPoco> GetAll(params Expression<Func<ApplicantWorkHistoryPoco, object>>[] navigationProperties)
         {
             ApplicantWorkHistoryPoco[] Pocos = new ApplicantWorkHistoryPoco[1000];
-            using (_connection)
+            SqlConnection Connection = new SqlConnection(_Connstring);
+
+            using (Connection)
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.Connection = _connection;
+                cmd.Connection = Connection;
                 cmd.CommandText = "select * from Applicant_Work_History";
-                _connection.Open();
+                Connection.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
                 int position = 0;
                 while (reader.Read())
@@ -85,7 +88,7 @@ namespace CareerCloud.ADODataAccessLayer
                     position++;
 
                 }
-                _connection.Close();
+                Connection.Close();
                 
             }
             return Pocos.Where(p => p != null).ToList();
@@ -106,35 +109,39 @@ namespace CareerCloud.ADODataAccessLayer
 
         public void Remove(params ApplicantWorkHistoryPoco[] items)
         {
-            using (_connection)
+            SqlConnection Connection = new SqlConnection(_Connstring);
+
+            using (Connection)
             {
 
 
                 SqlCommand cmd = new SqlCommand();
-                cmd.Connection = _connection;
+                cmd.Connection = Connection;
                 foreach (ApplicantWorkHistoryPoco Poco in items)
                 {
                     cmd.CommandText = @"DELETE FROM Applicant_Work_History WHERE ID = @ID";
                     cmd.Parameters.AddWithValue("@Id", Poco.Id);
-                    _connection.Open();
+                    Connection.Open();
                     cmd.ExecuteNonQuery();
-                    _connection.Close();
+                    Connection.Close();
                 }
             }
         }
 
         public void Update(params ApplicantWorkHistoryPoco[] items)
         {
-            using (_connection)
+            SqlConnection Connection = new SqlConnection(_Connstring);
+
+            using (Connection)
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.Connection = _connection;
+                cmd.Connection = Connection;
                 foreach(ApplicantWorkHistoryPoco Poco in items)
                 {
                     cmd.CommandText = @"UPDATE Applicant_Work_History 
                    SET
                      ID=@ID,Applicant=@Applicant,Company_Name=@Company_Name,Country_Code=@Country_Code,Location=@Location,
-                     Job_Title=@Job_Title, Job_Description=@Job_Description, Start_Month=@Start_Month,Start_Year=@Start_Year,End_Month=@End_Month,@End_Year
+                     Job_Title=@Job_Title, Job_Description=@Job_Description, Start_Month=@Start_Month,Start_Year=@Start_Year,End_Month=@End_Month,End_Year=@End_Year
                       WHERE ID=@ID";
 
 
@@ -151,9 +158,9 @@ namespace CareerCloud.ADODataAccessLayer
                     cmd.Parameters.AddWithValue("@End_Year", Poco.EndYear);
                     cmd.Parameters.AddWithValue("@ID", Poco.Id);
 
-                    _connection.Open();
+                    Connection.Open();
                     cmd.ExecuteNonQuery();
-                    _connection.Close();
+                    Connection.Close();
                 }
             }
         }

@@ -13,11 +13,13 @@ namespace CareerCloud.ADODataAccessLayer
   public  class CompanyJobSkillRepository : BaseADO, IDataRepository<CompanyJobSkillPoco>
     {
         public void Add(params CompanyJobSkillPoco[] items)
+
         {
-            using (_connection)
+            SqlConnection Connection = new SqlConnection(_Connstring);
+            using (Connection)
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.Connection = _connection;
+                cmd.Connection = Connection;
                 
                 foreach(CompanyJobSkillPoco Poco in items)
                 {
@@ -32,9 +34,9 @@ namespace CareerCloud.ADODataAccessLayer
                     cmd.Parameters.AddWithValue("@Importance", Poco.Importance);
 
 
-                    _connection.Open();
+                    Connection.Open();
                     cmd.ExecuteNonQuery();
-                    _connection.Close();
+                    Connection.Close();
 
                 }
             }
@@ -48,12 +50,13 @@ namespace CareerCloud.ADODataAccessLayer
         public IList<CompanyJobSkillPoco> GetAll(params Expression<Func<CompanyJobSkillPoco, object>>[] navigationProperties)
         {
             CompanyJobSkillPoco[] Pocos = new CompanyJobSkillPoco[1000];
-            using (_connection)
+            SqlConnection Connection = new SqlConnection(_Connstring);
+            using (Connection)
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.Connection = _connection;
-                cmd.CommandText = @"SELECT * FROM CompanyJobSkill";
-                _connection.Open();
+                cmd.Connection = Connection;
+                cmd.CommandText = @"SELECT * FROM Company_Job_Skills";
+                Connection.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
                 int position = 0;
                 while (reader.Read())
@@ -71,7 +74,7 @@ namespace CareerCloud.ADODataAccessLayer
 
                 }
 
-                _connection.Close();
+                Connection.Close();
             }
             return Pocos.Where(p => p != null).ToList();
         }
@@ -89,17 +92,18 @@ namespace CareerCloud.ADODataAccessLayer
 
         public void Remove(params CompanyJobSkillPoco[] items)
         {
-            using (_connection)
+            SqlConnection Connection = new SqlConnection(_Connstring);
+            using (Connection)
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.Connection = _connection;
+                cmd.Connection = Connection;
                 foreach(CompanyJobSkillPoco poco in items)
                 {
-                    cmd.CommandText = @"DELETE FROM CompanyJobSkill WHERE ID=@ID";
+                    cmd.CommandText = @"DELETE FROM Company_Job_Skills WHERE ID=@ID";
                     cmd.Parameters.AddWithValue("@Id", poco.Id);
-                    _connection.Open();
+                    Connection.Open();
                     cmd.ExecuteNonQuery();
-                    _connection.Close();
+                    Connection.Close();
 
                 }
 
@@ -111,14 +115,15 @@ namespace CareerCloud.ADODataAccessLayer
 
         public void Update(params CompanyJobSkillPoco[] items)
         {
-            using (_connection)
+            SqlConnection Connection = new SqlConnection(_Connstring);
+            using (Connection)
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.Connection = _connection;
+                cmd.Connection = Connection;
 
                 foreach(CompanyJobSkillPoco Poco in items)
                 {
-                    cmd.CommandText = @"UPDATE CompanyJobskill
+                    cmd.CommandText = @"UPDATE Company_Job_skills
                     SET Job=@Job,Skill=@Skill,Skill_Level=@Skill_Level,Importance=@Importance
                      WHERE Id=@Id";
                  
@@ -128,9 +133,9 @@ namespace CareerCloud.ADODataAccessLayer
                     cmd.Parameters.AddWithValue("@Importance", Poco.Importance);
                     cmd.Parameters.AddWithValue("@Id", Poco.Id);
 
-                    _connection.Open();
+                    Connection.Open();
                     cmd.ExecuteNonQuery();
-                    _connection.Close();
+                    Connection.Close();
                 }
 
             }

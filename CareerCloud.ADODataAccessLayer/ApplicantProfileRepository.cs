@@ -14,11 +14,13 @@ namespace CareerCloud.ADODataAccessLayer
     {
         public void Add(params ApplicantProfilePoco[] items)
         {
+            SqlConnection Connection = new SqlConnection(_Connstring);
 
-            using (_connection) 
+
+            using (Connection) 
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.Connection = _connection;
+                cmd.Connection = Connection;
            
 
                 foreach (ApplicantProfilePoco Poco in items)
@@ -37,12 +39,12 @@ namespace CareerCloud.ADODataAccessLayer
                     cmd.Parameters.AddWithValue("@Street_Address", Poco.Street);
                     cmd.Parameters.AddWithValue("@City_Town", Poco.City);
                     cmd.Parameters.AddWithValue("@Zip_Postal_Code", Poco.PostalCode);
-                    cmd.Parameters.AddWithValue("@Time_Stamp", Poco.TimeStamp);
+                   
 
 
-                    _connection.Open();
-              cmd.ExecuteNonQuery();
-                    _connection.Close();
+                    Connection.Open();
+                    cmd.ExecuteNonQuery();
+                    Connection.Close();
 
 
                 }
@@ -57,12 +59,14 @@ namespace CareerCloud.ADODataAccessLayer
         public IList<ApplicantProfilePoco> GetAll(params System.Linq.Expressions.Expression<Func<ApplicantProfilePoco, object>>[] navigationProperties)
         {
             ApplicantProfilePoco[] pocos = new ApplicantProfilePoco[1000];
-            using (_connection)
+            SqlConnection Connection = new SqlConnection(_Connstring);
+
+            using (Connection)
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.Connection = _connection;
+                cmd.Connection = Connection;
                 cmd.CommandText = "SELECT * FROM Applicant_Profiles";
-                _connection.Open();
+                Connection.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
                 int position = 0;
                 while (reader.Read())
@@ -83,7 +87,7 @@ namespace CareerCloud.ADODataAccessLayer
                     pocos[position] = poco;
                     position++;
                 }
-                _connection.Close();
+                Connection.Close();
             }
             return pocos.Where(p => p != null).ToList();
         }
@@ -101,31 +105,35 @@ namespace CareerCloud.ADODataAccessLayer
 
         public void Remove(params ApplicantProfilePoco[] items)
         {
-            using (_connection)
+            SqlConnection Connection = new SqlConnection(_Connstring);
+
+            using (Connection)
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.Connection = _connection;
+                cmd.Connection = Connection;
                 foreach (ApplicantProfilePoco Poco in items)
                 {
                     cmd.CommandText = @"DELETE FROM Applicant_Profiles  WHERE ID = @ID";
                     cmd.Parameters.AddWithValue("@Id", Poco.Id);
-                    _connection.Open();
+                    Connection.Open();
                     cmd.ExecuteNonQuery();
-                    _connection.Close();
+                    Connection.Close();
                 }
             }
         }
 
         public void Update(params ApplicantProfilePoco[] items)
         {
-            using (_connection)
+            SqlConnection Connection = new SqlConnection(_Connstring);
+
+            using (Connection)
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.Connection = _connection;
+                cmd.Connection = Connection;
    
                 foreach(ApplicantProfilePoco Poco in items)
                 {
-                    cmd.CommandText = @"UPDATE Applicant_Profile 
+                    cmd.CommandText = @"UPDATE Applicant_Profiles 
                     SET
                     login=@login,Current_Salary=@Current_Salary,Current_Rate=@Current_Rate,Currency=@Currency,
                     Country_Code=@Country_Code,State_Province_Code=@State_Province_Code,Street_Address=@Street_Address,
@@ -143,9 +151,9 @@ namespace CareerCloud.ADODataAccessLayer
                     cmd.Parameters.AddWithValue("@Zip_Postal_Code", Poco.PostalCode);
                     cmd.Parameters.AddWithValue("@Id", Poco.Id);
 
-                    _connection.Open();
+                    Connection.Open();
                    cmd.ExecuteNonQuery();
-                    _connection.Close();
+                    Connection.Close();
 
 
                 }

@@ -15,10 +15,12 @@ namespace CareerCloud.ADODataAccessLayer
     
        public void Add(params ApplicantJobApplicationPoco[] items)
         {
-            using (_connection)
+            SqlConnection Connection = new SqlConnection(_Connstring);
+
+            using (Connection)
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.Connection = _connection;
+                cmd.Connection = Connection;
                
 
                 foreach (ApplicantJobApplicationPoco Poco in items)
@@ -31,9 +33,9 @@ namespace CareerCloud.ADODataAccessLayer
                     cmd.Parameters.AddWithValue("@Job", Poco.Job);
                     cmd.Parameters.AddWithValue("@Application_Date", Poco.ApplicationDate);
 
-                    _connection.Open();
+                    Connection.Open();
                   cmd.ExecuteNonQuery();
-                    _connection.Close();
+                    Connection.Close();
                 
                 }
                  
@@ -52,12 +54,14 @@ namespace CareerCloud.ADODataAccessLayer
         public IList<ApplicantJobApplicationPoco> GetAll(params Expression<Func<ApplicantJobApplicationPoco, object>>[] navigationProperties)
         {
             ApplicantJobApplicationPoco[] Pocos= new ApplicantJobApplicationPoco[1000];
-            using (_connection)
+            SqlConnection Connection = new SqlConnection(_Connstring);
+
+            using (Connection)
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.Connection = _connection;
+                cmd.Connection = Connection;
                 cmd.CommandText = "SELECT * FROM Applicant_Job_Applications";
-                _connection.Open();
+                Connection.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
                 int position = 0;
                  while(reader.Read())
@@ -73,7 +77,7 @@ namespace CareerCloud.ADODataAccessLayer
                     position++;
                 
                 }
-                _connection.Close();
+                Connection.Close();
                    
             }
             return Pocos.Where(p => p != null).ToList();
@@ -92,17 +96,19 @@ namespace CareerCloud.ADODataAccessLayer
 
         public void Remove(params ApplicantJobApplicationPoco[] items)
         {
-            using (_connection)
+            SqlConnection Connection = new SqlConnection(_Connstring);
+
+            using (Connection)
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.Connection = _connection;
+                cmd.Connection = Connection;
                 foreach (ApplicantJobApplicationPoco Poco in items)
                 {
                     cmd.CommandText = @"DELETE FROM Applicant_Job_Applications WHERE ID = @ID";
                     cmd.Parameters.AddWithValue("@Id", Poco.Id);
-                    _connection.Open();
+                    Connection.Open();
                     cmd.ExecuteNonQuery();
-                    _connection.Close();
+                    Connection.Close();
                 }
             }
 
@@ -110,10 +116,12 @@ namespace CareerCloud.ADODataAccessLayer
 
         public void Update(params ApplicantJobApplicationPoco[] items)
         {
-            using (_connection)
+            SqlConnection Connection = new SqlConnection(_Connstring);
+
+            using (Connection)
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.Connection = _connection;
+                cmd.Connection = Connection;
                
                 foreach(ApplicantJobApplicationPoco Poco in items)
                 {
@@ -121,8 +129,7 @@ namespace CareerCloud.ADODataAccessLayer
                     SET 
                     Applicant=@Applicant,
                     Job =@Job,
-                    Application_Date=@Application_Date,
-                    Time_Stamp=@Time_Stamp,
+                    Application_Date=@Application_Date
                     WHERE ID = @ID";
 
                   
@@ -131,9 +138,9 @@ namespace CareerCloud.ADODataAccessLayer
                     cmd.Parameters.AddWithValue("@Application_Date", Poco.ApplicationDate);
                     cmd.Parameters.AddWithValue("@ID", Poco.Id);
 
-                    _connection.Open();
+                    Connection.Open();
                     cmd.ExecuteNonQuery();
-                    _connection.Close();
+                    Connection.Close();
 
 
 

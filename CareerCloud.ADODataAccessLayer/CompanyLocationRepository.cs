@@ -16,30 +16,31 @@ namespace CareerCloud.ADODataAccessLayer
 
         public void Add(params CompanyLocationPoco[] items)
         {
-            using (_connection)
+            SqlConnection Connection = new SqlConnection(_Connstring);
+            using (Connection)
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.Connection = _connection;
+                cmd.Connection = Connection;
 
                 foreach(CompanyLocationPoco Poco in items)
                 {
                     cmd.CommandText= @"INSERT INTO [dbo].[Company_Locations]
                    ([Id],[Company],[Country_Code],[State_Province_Code],[Street_Address],[City_Town],[Zip_Postal_Code])
-                    Values(@Id,@Company,@Country_Code,@State_Province_code,@Street_Addeess,@City_Town,@Zip_Postal_Code)";
+                    Values(@Id,@Company,@Country_Code,@State_Province_code,@Street_Address,@City_Town,@Zip_Postal_Code)";
 
 
                     cmd.Parameters.AddWithValue("@Id", Poco.Id);
                     cmd.Parameters.AddWithValue("@Company", Poco.Company);
                     cmd.Parameters.AddWithValue("@Country_Code", Poco.CountryCode);
                     cmd.Parameters.AddWithValue("@State_Province_code", Poco.Province);
-                    cmd.Parameters.AddWithValue("@Street_Addeess", Poco.Street);
+                    cmd.Parameters.AddWithValue("@Street_Address", Poco.Street);
                     cmd.Parameters.AddWithValue("@City_Town", Poco.City);
                     cmd.Parameters.AddWithValue("@Zip_Postal_Code", Poco.PostalCode);
 
 
-                    _connection.Open();
+                    Connection.Open();
                     cmd.ExecuteNonQuery();
-                    _connection.Close();
+                    Connection.Close();
                 }
                 
                 
@@ -54,12 +55,13 @@ namespace CareerCloud.ADODataAccessLayer
         public IList<CompanyLocationPoco> GetAll(params Expression<Func<CompanyLocationPoco, object>>[] navigationProperties)
         {
             CompanyLocationPoco[] pocos = new CompanyLocationPoco[1000];
-            using (_connection)
+            SqlConnection Connection = new SqlConnection(_Connstring);
+            using (Connection)
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.Connection = _connection;
+                cmd.Connection = Connection;
                 cmd.CommandText = @"SELECT * FROM Company_Locations";
-                _connection.Open();
+                Connection.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 int position = 0;
@@ -80,7 +82,7 @@ namespace CareerCloud.ADODataAccessLayer
 
 
                 }
-                _connection.Close();
+                Connection.Close();
             }
             return pocos.Where(p => p != null).ToList();
 
@@ -100,17 +102,18 @@ namespace CareerCloud.ADODataAccessLayer
 
         public void Remove(params CompanyLocationPoco[] items)
         {
-            using (_connection)
+            SqlConnection Connection = new SqlConnection(_Connstring);
+            using (Connection)
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.Connection = _connection;
+                cmd.Connection = Connection;
                 cmd.CommandText = @"DELETE FROM Company_Locations WHERE ID=@ID";
                 foreach (CompanyLocationPoco Poco in items)
                 {
                     cmd.Parameters.AddWithValue("@ID", Poco.Id);
-                    _connection.Open();
+                    Connection.Open();
                     cmd.ExecuteNonQuery();
-                    _connection.Close();
+                    Connection.Close();
                 }
             }
                 
@@ -119,30 +122,31 @@ namespace CareerCloud.ADODataAccessLayer
 
         public void Update(params CompanyLocationPoco[] items)
         {
-            using (_connection)
+            SqlConnection Connection = new SqlConnection(_Connstring);
+            using (Connection)
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.Connection = _connection;
+                cmd.Connection = Connection;
 
                 foreach(CompanyLocationPoco Poco in items)
                 {
                     cmd.CommandText = @"UPDATE Company_Locations 
-                     SET Company=@Company,Country_Code=@Country_Code,State_Province_code=@State_Province_code
-                     Street_Addeess=@Street_Addeess,City_Town=@City_Town,Zip_Postal_Code=@Zip_Postal_Code
+                     SET Company=@Company,Country_Code=@Country_Code,State_Province_code=@State_Province_code,
+                     Street_Address=@Street_Address,City_Town=@City_Town,Zip_Postal_Code=@Zip_Postal_Code
                        WHERE Id=@Id";
 
 
                     cmd.Parameters.AddWithValue("@Company", Poco.Company);
                     cmd.Parameters.AddWithValue("@Country_Code", Poco.CountryCode);
                     cmd.Parameters.AddWithValue("@State_Province_code", Poco.Province);
-                    cmd.Parameters.AddWithValue("@Street_Addeess", Poco.Street);
+                    cmd.Parameters.AddWithValue("@Street_Address", Poco.Street);
                     cmd.Parameters.AddWithValue("@City_Town", Poco.City);
                     cmd.Parameters.AddWithValue("@Zip_Postal_Code", Poco.PostalCode);
                     cmd.Parameters.AddWithValue("@Id", Poco.Id);
 
-                    _connection.Open();
+                    Connection.Open();
                     cmd.ExecuteNonQuery();
-                    _connection.Close();
+                    Connection.Close();
 
 
 

@@ -12,12 +12,14 @@ namespace CareerCloud.ADODataAccessLayer
 {
    public class SecurityLoginRepository : BaseADO, IDataRepository<SecurityLoginPoco>
     {
+        
         public void Add(params SecurityLoginPoco[] items)
         {
-            using (_connection)
+            SqlConnection Connection = new SqlConnection(_Connstring);
+            using (Connection)
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.Connection = _connection;
+                cmd.Connection = Connection;
 
                 foreach(SecurityLoginPoco Poco in items)
                 {
@@ -43,9 +45,9 @@ namespace CareerCloud.ADODataAccessLayer
                     cmd.Parameters.AddWithValue("@Force_Change_Password", Poco.ForceChangePassword);
                     cmd.Parameters.AddWithValue("@Prefferred_Language", Poco.PrefferredLanguage);
 
-                    _connection.Open();
+                    Connection.Open();
                     cmd.ExecuteNonQuery();
-                    _connection.Close();
+                    Connection.Close();
                 }
             }
         }
@@ -58,12 +60,13 @@ namespace CareerCloud.ADODataAccessLayer
         public IList<SecurityLoginPoco> GetAll(params Expression<Func<SecurityLoginPoco, object>>[] navigationProperties)
         {
             SecurityLoginPoco[] Pocos = new SecurityLoginPoco[1000];
-            using (_connection)
+            SqlConnection Connection = new SqlConnection(_Connstring);
+            using (Connection)
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.Connection = _connection;
+                cmd.Connection = Connection;
                 cmd.CommandText = @"SELECT * FROM Security_Logins";
-                _connection.Open();
+                Connection.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 int position = 0;
@@ -91,7 +94,7 @@ namespace CareerCloud.ADODataAccessLayer
                    
                   
                 }
-                _connection.Close();
+                Connection.Close();
 
             }
             return Pocos.Where(p => p != null).ToList();
@@ -110,28 +113,30 @@ namespace CareerCloud.ADODataAccessLayer
 
         public void Remove(params SecurityLoginPoco[] items)
         {
-            using (_connection)
+            SqlConnection Connection = new SqlConnection(_Connstring);
+            using (Connection)
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.Connection = _connection;
+                cmd.Connection = Connection;
                 foreach (SecurityLoginPoco Poco in items)
                 {
                     cmd.CommandText = @"DELETE FROM Security_Logins WHERE ID = @ID";
 
                     cmd.Parameters.AddWithValue("@Id", Poco.Id);
-                    _connection.Open();
+                    Connection.Open();
                     cmd.ExecuteNonQuery();
-                    _connection.Close();
+                    Connection.Close();
                 }
             }
         }
 
         public void Update(params SecurityLoginPoco[] items)
         {
-            using (_connection)
+            SqlConnection Connection = new SqlConnection(_Connstring);
+            using (Connection)
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.Connection = _connection;
+                cmd.Connection = Connection;
 
                 foreach (SecurityLoginPoco Poco in items)
                 {
@@ -161,9 +166,9 @@ namespace CareerCloud.ADODataAccessLayer
                     cmd.Parameters.AddWithValue("@Prefferred_Language", Poco.PrefferredLanguage);
                     cmd.Parameters.AddWithValue("@Id", Poco.Id);
 
-                    _connection.Open();
+                    Connection.Open();
                     cmd.ExecuteNonQuery();
-                    _connection.Close();
+                    Connection.Close();
                 }
             }
         }

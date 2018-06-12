@@ -14,10 +14,12 @@ namespace CareerCloud.ADODataAccessLayer
     {
         public void Add(params ApplicantSkillPoco[] items)
         {
-            using (_connection)
+            SqlConnection Connection = new SqlConnection(_Connstring);
+
+            using (Connection)
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.Connection = _connection;
+                cmd.Connection = Connection;
                  foreach(ApplicantSkillPoco poco in items)
                 {
                     cmd.CommandText = @"INSERT INTO [dbo].[Applicant_Skills]
@@ -33,9 +35,9 @@ namespace CareerCloud.ADODataAccessLayer
                     cmd.Parameters.AddWithValue("@End_Month", poco.EndMonth);
                     cmd.Parameters.AddWithValue("@End_Year", poco.EndYear);
 
-                    _connection.Open();
+                    Connection.Open();
                     cmd.ExecuteNonQuery();
-                    _connection.Close();
+                    Connection.Close();
                 }
             }
         }
@@ -48,12 +50,14 @@ namespace CareerCloud.ADODataAccessLayer
         public IList<ApplicantSkillPoco> GetAll(params Expression<Func<ApplicantSkillPoco, object>>[] navigationProperties)
         {
             ApplicantSkillPoco[] pocos = new ApplicantSkillPoco[1000];
-            using (_connection)
+            SqlConnection Connection = new SqlConnection(_Connstring);
+
+            using (Connection)
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.Connection = _connection;
+                cmd.Connection = Connection;
                 cmd.CommandText = "select * from Applicant_Skills";
-                _connection.Open();
+                Connection.Open();
                 SqlDataReader reader= cmd.ExecuteReader();
                 int position = 0;
                 while(reader.Read())
@@ -72,7 +76,7 @@ namespace CareerCloud.ADODataAccessLayer
                     pocos[position] = Poco;
                     position++;   
                 }
-                _connection.Close();
+                Connection.Close();
             }
             return pocos.Where(p=>p!=null).ToList();
         }
@@ -91,34 +95,38 @@ namespace CareerCloud.ADODataAccessLayer
 
         public void Remove(params ApplicantSkillPoco[] items)
         {
-            using (_connection)
+            SqlConnection Connection = new SqlConnection(_Connstring);
+
+            using (Connection)
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.Connection = _connection;
+                cmd.Connection = Connection;
                 foreach (ApplicantSkillPoco Poco in items)
                 {
-                    cmd.CommandText = @"DELETE FROM Applicnt_Skills WHERE ID = @ID";
+                    cmd.CommandText = @"DELETE FROM Applicant_Skills WHERE ID = @ID";
                     cmd.Parameters.AddWithValue("@Id", Poco.Id);
-                    _connection.Open();
+                    Connection.Open();
                     cmd.ExecuteNonQuery();
-                    _connection.Close();
+                    Connection.Close();
                 }
             }
         }
 
         public void Update(params ApplicantSkillPoco[] items)
         {
-            using (_connection)
+            SqlConnection Connection = new SqlConnection(_Connstring);
+
+            using (Connection)
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.Connection = _connection;
+                cmd.Connection = Connection;
               
 
                 foreach(ApplicantSkillPoco poco in items)
                 {
                     cmd.CommandText = @"UPDATE Applicant_Skills
                      SET
-                     Applicant=@Applicant,Skill=@Skill,Skill_Level=@Skill_Level,STart_Month=@Start_Month,Start_Year=@Start_Year,End_Month=@End_Month,End_Year=@End_Year,Time_Stamp=@Time_Stamp
+                     Applicant=@Applicant,Skill=@Skill,Skill_Level=@Skill_Level,STart_Month=@Start_Month,Start_Year=@Start_Year,End_Month=@End_Month,End_Year=@End_Year
                      WHERE ID=@ID";
 
 
@@ -132,9 +140,9 @@ namespace CareerCloud.ADODataAccessLayer
                     cmd.Parameters.AddWithValue("@End_Year", poco.EndYear);
                     cmd.Parameters.AddWithValue("@Id", poco.Id);
 
-                    _connection.Open();
+                    Connection.Open();
                     cmd.ExecuteNonQuery();
-                    _connection.Close();
+                    Connection.Close();
 
                 }
             }
