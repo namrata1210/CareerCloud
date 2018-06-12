@@ -47,7 +47,8 @@ namespace CareerCloud.ADODataAccessLayer
 
         public IList<CompanyJobPoco> GetAll(params Expression<Func<CompanyJobPoco, object>>[] navigationProperties)
         {
-            CompanyJobPoco[] Pocos = new CompanyJobPoco[1000];
+           
+            CompanyJobPoco[] Pocos = new CompanyJobPoco[1001];
             SqlConnection Connection = new SqlConnection(_Connstring);
             using (Connection)
             {
@@ -56,7 +57,9 @@ namespace CareerCloud.ADODataAccessLayer
                 cmd.CommandText = @"SELECT * FROM Company_Jobs";
                 Connection.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
+
                 int position = 0;
+
                 while(reader.Read())
                 {
                     CompanyJobPoco Poco = new CompanyJobPoco();
@@ -73,10 +76,8 @@ namespace CareerCloud.ADODataAccessLayer
 
                 }
                 Connection.Close();
-
-
             }
-            return Pocos.Where(p => p != null).ToList();
+            return Pocos.Where(p =>p!= null).ToList();
         }
 
         public IList<CompanyJobPoco> GetList(Expression<Func<CompanyJobPoco, bool>> where, params Expression<Func<CompanyJobPoco, object>>[] navigationProperties)
@@ -120,7 +121,7 @@ namespace CareerCloud.ADODataAccessLayer
                 foreach(CompanyJobPoco Poco in items)
                 {
                     cmd.CommandText = @"UPDATE Company_Jobs
-                     SET Company=@Company,Profile_Created=@Profile_Created,Is_Inactive=@Is_Inactive,Is_Company_Hidden=@Is_Company_Hidden,
+                     SET Company=@Company,Profile_Created=@Profile_Created,Is_Inactive=@Is_Inactive,Is_Company_Hidden=@Is_Company_Hidden
                      WHERE Id=@Id";
 
 

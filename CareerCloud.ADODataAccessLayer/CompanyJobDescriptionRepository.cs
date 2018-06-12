@@ -52,7 +52,7 @@ namespace CareerCloud.ADODataAccessLayer
 
         public IList<CompanyJobDescriptionPoco> GetAll(params Expression<Func<CompanyJobDescriptionPoco, object>>[] navigationProperties)
         {
-            CompanyJobDescriptionPoco[] Pocos = new CompanyJobDescriptionPoco[1000];
+            CompanyJobDescriptionPoco[] Pocos = new CompanyJobDescriptionPoco[1001];
             SqlConnection Connection = new SqlConnection(_Connstring);
 
             using (Connection)
@@ -123,9 +123,9 @@ namespace CareerCloud.ADODataAccessLayer
 
                 foreach(CompanyJobDescriptionPoco Poco in items)
                 {
-                    cmd.CommandText = @"UPDATE Company_Job_Descriptions
+                    cmd.CommandText = @"UPDATE Company_Jobs_Descriptions
                     SET 
-                      Job=@Job,Job_Name=@Job_Name,Jobs_Description=@Job_Description
+                      Job=@Job,Job_Name=@Job_Name,Job_Descriptions=@Job_Descriptions
                        WHERE Id=@Id";
 
 
@@ -134,7 +134,7 @@ namespace CareerCloud.ADODataAccessLayer
 
                     cmd.Parameters.AddWithValue("@Job", Poco.Job);
                     cmd.Parameters.AddWithValue("@Job_Name", Poco.JobName);
-                    cmd.Parameters.AddWithValue("@Job_Description", Poco.JobDescriptions);
+                    cmd.Parameters.AddWithValue("@Job_Descriptions", Poco.JobDescriptions);
                     cmd.Parameters.AddWithValue("@Id", Poco.Id);
 
                     Connection.Open();

@@ -142,9 +142,9 @@ namespace CareerCloud.ADODataAccessLayer
                 {
                     cmd.CommandText = @"UPDATE Security_Logins 
                     SET
-                     Login=@Login,Password=@Password,Created_Date=@Created_Date,Password_Update_Date=@Password_Update_Date
-                      Agreement_Accepted_Date=@Agreement_Accepted_Date,Is_Locked=@Is_Locked,Is_Inactive=@Is_Inactive
-                      Email_Address=@Email_Address,Phone_Number=@Phone_Number,Full_Name=@Full_Name,Force_Change_Password=@Force_Change_Password
+                     Login=@Login,Password=@Password,Created_Date=@Created_Date,Password_Update_Date=@Password_Update_Date,
+                      Agreement_Accepted_Date=@Agreement_Accepted_Date,Is_Locked=@Is_Locked,Is_Inactive=@Is_Inactive,
+                      Email_Address=@Email_Address,Phone_Number=@Phone_Number,Full_Name=@Full_Name,Force_Change_Password=@Force_Change_Password,
                       Prefferred_Language=@Prefferred_Language WHERE Id=@Id";
 
 

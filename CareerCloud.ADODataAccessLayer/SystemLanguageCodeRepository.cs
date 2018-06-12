@@ -112,7 +112,7 @@ namespace CareerCloud.ADODataAccessLayer
                 cmd.Connection = Connection;
                 foreach (SystemLanguageCodePoco Poco in items)
                 {
-                    cmd.CommandText = @"UPDATE System_Language-Codes
+                    cmd.CommandText = @"UPDATE System_Language_Codes
                       SET Name=@Name,Native_Name=@Native_Name
                         WHERE LanguageId=@LanguageId";
 

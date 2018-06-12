@@ -117,7 +117,7 @@ namespace CareerCloud.ADODataAccessLayer
                 cmd.Connection = Connection;
                 foreach (SystemCountryCodePoco Poco in items)
                 {
-                    cmd.CommandText = @"UPDATE FROM System_Country_Codes
+                    cmd.CommandText = @"UPDATE  System_Country_Codes
                     SET Name=@Name WHERE Code=@Code";
 
                     

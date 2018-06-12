@@ -51,7 +51,7 @@ namespace CareerCloud.ADODataAccessLayer
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = Connection;
-                cmd.CommandText = @"SELECT * FROM Security_Logins__Roles";
+                cmd.CommandText = @"SELECT * FROM Security_Logins_Roles";
                 Connection.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
 

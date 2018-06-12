@@ -27,11 +27,12 @@ namespace CareerCloud.ADODataAccessLayer
                 foreach(CompanyDescriptionPoco Poco in items)
                 {
                     cmd.CommandText = @"INSERT INTO [dbo].[Company_Descriptions]
-                    ([Id],[Company],[LanguageID] ,[Company_Description])Values(@Id,@Company,@LangaugeId,@Company_Description)";
+           ([Id],[Company],[LanguageID],[Company_Name],[Company_Description]) 
+                     Values (@Id , @Company , @LangaugeId, @Company_Name, @Company_Description)";
 
                     cmd.Parameters.AddWithValue("@Id", Poco.Id);
                     cmd.Parameters.AddWithValue("@Company", Poco.Company);
-                    cmd.Parameters.AddWithValue("@LanguageId", Poco.LanguageId);
+                    cmd.Parameters.AddWithValue("@LangaugeId", Poco.LanguageId);
                     cmd.Parameters.AddWithValue("@Company_Name", Poco.CompanyName);
                     cmd.Parameters.AddWithValue("@Company_Description", Poco.CompanyDescription);
 
@@ -128,7 +129,7 @@ namespace CareerCloud.ADODataAccessLayer
                     SET
                     Company=@Company,LanguageId=@LanguageId,Company_Name=@Company_Name,Company_Description=@Company_Description 
                      WHERE Id=@Id";
-                    cmd.Parameters.AddWithValue("@Id", Poco.Id);
+                    
                     cmd.Parameters.AddWithValue("@Company", Poco.Company);
                     cmd.Parameters.AddWithValue("@LanguageId", Poco.LanguageId);
                     cmd.Parameters.AddWithValue("@Company_Name", Poco.CompanyName);

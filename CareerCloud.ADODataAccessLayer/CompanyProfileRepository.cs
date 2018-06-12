@@ -55,7 +55,7 @@ namespace CareerCloud.ADODataAccessLayer
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = Connection;
-                cmd.CommandText = @"SELECT * FROM Comapny_Profiles";
+                cmd.CommandText = @"SELECT * FROM Company_Profiles";
                 Connection.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
 
@@ -121,13 +121,13 @@ namespace CareerCloud.ADODataAccessLayer
                 {
                     cmd.CommandText = @"UPDATE Company_Profiles
                     SET 
-                     Regestration_Date=@Regestration_Date,Company_Website=@Company_Website,Contact_Phone=@Contact_Phone,
+                     Registration_Date=@Registration_Date,Company_Website=@Company_Website,Contact_Phone=@Contact_Phone,
                     Contact_Name=@Contact_Name,Company_Logo=@Company_Logo 
                      WHERE Id=@Id";
 
 
 
-                    cmd.Parameters.AddWithValue("@Regestration_Date", Poco.RegistrationDate);
+                    cmd.Parameters.AddWithValue("@Registration_Date", Poco.RegistrationDate);
                     cmd.Parameters.AddWithValue("@Company_Website", Poco.CompanyWebsite);
                     cmd.Parameters.AddWithValue("@Contact_Phone", Poco.ContactPhone);
                     cmd.Parameters.AddWithValue("@Contact_Name", Poco.ContactName);
