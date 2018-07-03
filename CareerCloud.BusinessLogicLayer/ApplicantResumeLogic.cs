@@ -8,38 +8,42 @@ using System.Threading.Tasks;
 
 namespace CareerCloud.BusinessLogicLayer
 {
-   public class ApplicantJobApplicationLogic:BaseLogic<ApplicantJobApplicationPoco>
+    public class ApplicantResumeLogic:BaseLogic<ApplicantResumePoco>
     {
-        public ApplicantJobApplicationLogic(IDataRepository<ApplicantJobApplicationPoco>repository)
+        public ApplicantResumeLogic(IDataRepository<ApplicantResumePoco>repository)
             :base(repository)
         {
 
         }
-        public override void Add(ApplicantJobApplicationPoco[] pocos)
+        public override void Add(ApplicantResumePoco[] pocos)
         {
             Verify(pocos);
             base.Add(pocos);
         }
-        public override void Update(ApplicantJobApplicationPoco[] pocos)
+        public override void Update(ApplicantResumePoco[] pocos)
         {
             Verify(pocos);
             base.Update(pocos);
         }
-        protected override void Verify(ApplicantJobApplicationPoco[] pocos)
+        protected override void Verify(ApplicantResumePoco[] pocos)
         {
             List<ValidationException> exceptions = new List<ValidationException>();
             {
-                foreach(ApplicantJobApplicationPoco poco in pocos)
+                foreach(ApplicantResumePoco poco in pocos)
                 {
-                    if (poco.ApplicationDate > DateTime.Now)
-                        exceptions.Add(new ValidationException(110, $"ApplicationDate cannot be greater than today-{poco.Id}"));
+                    if(string.IsNullOrEmpty(poco.Resume))
+                    {
+                        exceptions.Add(new ValidationException(113, $"Resume cannot be empty"));
+                    }
                 }
                 if(exceptions.Count>0)
                 {
                     throw new AggregateException(exceptions);
+                 
                 }
             }
-
         }
+
+
     }
 }

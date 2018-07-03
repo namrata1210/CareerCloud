@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CareerCloud.BusinessLogicLayer
 {
-    class ApplicantEducationLogic:BaseLogic<ApplicantEducationPoco>
+   public class ApplicantEducationLogic:BaseLogic<ApplicantEducationPoco>
     {
         public ApplicantEducationLogic(IDataRepository<ApplicantEducationPoco>repository)
             :base(repository)
