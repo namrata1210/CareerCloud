@@ -58,6 +58,7 @@
     <Compile Include="SecurityLoginLogic.cs" />
     <Compile Include="SecurityRoleLogic.cs" />
     <Compile Include="SystemCountryCodeLogic.cs" />
+    <Compile Include="SystemLanguageCodeLogic.cs" />
     <Compile Include="ValidationException.cs" />
   </ItemGroup>
   <ItemGroup>
