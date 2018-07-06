@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CareerCloud.BusinessLogicLayer
 {
-    class CompanyProfileLogic : BaseLogic<CompanyProfilePoco>
+  public  class CompanyProfileLogic : BaseLogic<CompanyProfilePoco>
     {
         public CompanyProfileLogic(IDataRepository<CompanyProfilePoco> repository)
             : base(repository)
@@ -30,7 +30,7 @@ namespace CareerCloud.BusinessLogicLayer
             List<ValidationException> exceptions = new List<ValidationException>();
             string[] websitesmustendwith = new string[] { ".ca", ".com", ".biz" };
 
-            foreach (var poco in pocos)
+            foreach (CompanyProfilePoco poco in pocos)
             {
                 if (string.IsNullOrEmpty(poco.CompanyWebsite))
                 {
