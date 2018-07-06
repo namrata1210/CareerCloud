@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace CareerCloud.BusinessLogicLayer
 {
-    public class SecurityLoginRoleLogic:BaseLogic<SecurityLoginsRolePoco>
+    public class SecurityLoginsLogLogic:BaseLogic<SecurityLoginsLogPoco>
     {
-        public SecurityLoginRoleLogic(IDataRepository<SecurityLoginsRolePoco>repository)
+        public SecurityLoginsLogLogic(IDataRepository<SecurityLoginsLogPoco>repository)
             :base(repository)
         {
-
+                
         }
     }
 }

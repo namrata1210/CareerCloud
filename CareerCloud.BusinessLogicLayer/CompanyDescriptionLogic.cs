@@ -29,15 +29,23 @@ namespace CareerCloud.BusinessLogicLayer
         {
             List<ValidationException> exceptions = new List<ValidationException>();
             {
-                foreach(CompanyDescriptionPoco poco in pocos)
+                foreach(CompanyDescriptionPoco Poco in pocos)
                 {
-                    if(poco.CompanyDescription.Length<2)
+                    if (string.IsNullOrEmpty(Poco.CompanyDescription))
                     {
-                        exceptions.Add(new ValidationException(107, $"CompanyDescription must be greater than 2 characters-{poco.Id}"));
+                        exceptions.Add(new ValidationException(107, $"CompanyDescription must be greater than 2 characters-{Poco.Id}"));
                     }
-                    if(poco.CompanyName.Length<2)
+                   else if(Poco.CompanyDescription.Length<=2)
                     {
-                        exceptions.Add(new ValidationException(106, $"CompanyName must be greater than 2 characters-{poco.Id}"));
+                        exceptions.Add(new ValidationException(107, $"CompanyDescription must be greater than 2 characters-{Poco.Id}"));
+                    }
+                    if(string.IsNullOrEmpty(Poco.CompanyName))
+                    {
+                        exceptions.Add(new ValidationException(106, $"CompanyName must be greater than 2 characters-{Poco.Id}"));
+                    }
+                  else  if(Poco.CompanyName.Length<=2)
+                    {
+                        exceptions.Add(new ValidationException(106, $"CompanyName must be greater than 2 characters-{Poco.Id}"));
                     }
                 }
                 if(exceptions.Count>0)
