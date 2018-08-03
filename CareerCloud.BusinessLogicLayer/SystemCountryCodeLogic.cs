@@ -8,44 +8,55 @@ using System.Threading.Tasks;
 
 namespace CareerCloud.BusinessLogicLayer
 {
-   public class SystemCountryCodeLogic:SystemCountryCodePoco
+    public class SystemCountryCodeLogic
     {
-        public SystemCountryCodeLogic(IDataRepository<SystemCountryCodePoco>repository)
-        {
+        protected IDataRepository<SystemCountryCodePoco> _repository;
 
+        public SystemCountryCodeLogic(IDataRepository<SystemCountryCodePoco> repository)
+        { _repository = repository; }
+
+        public SystemCountryCodePoco Get(string code)
+        {
+            return _repository.GetSingle(c => c.Code == code);
         }
-        public void Add(SystemCountryCodePoco[]pocos)
+
+        public List<SystemCountryCodePoco> GetAll()
+        {
+            IList<SystemCountryCodePoco> pocos = _repository.GetAll().ToList();
+            return pocos.ToList();
+        }
+        public void Add(SystemCountryCodePoco[] pocos)
         {
             Verify(pocos);
-            Add(pocos);
+            _repository.Add(pocos);
         }
-        public void Update(SystemCountryCodePoco[]pocos)
+
+        public void Update(SystemCountryCodePoco[] pocos)
         {
             Verify(pocos);
-            Update(pocos);
+            _repository.Update(pocos);
         }
-        protected void Verify(SystemCountryCodePoco[]pocos)
+        protected void Verify(SystemCountryCodePoco[] pocos)
         {
             List<ValidationException> exceptions = new List<ValidationException>();
+            foreach (SystemCountryCodePoco poco in pocos)
             {
-                foreach(SystemCountryCodePoco poco in pocos)
+                if (string.IsNullOrEmpty(poco.Code))
                 {
-                    if(string.IsNullOrEmpty(poco.Code))
-                    {
-                        exceptions.Add(new ValidationException(900, $"Cannot be empty-{poco.Code}"));
-                    }
-                    if(string.IsNullOrEmpty(poco.Name))
-                    {
-                        exceptions.Add(new ValidationException(901, $"Cannot be empty-{poco.Code}"));
-                    }
+                    exceptions.Add(new ValidationException(900,
+                        $"Cannot be empty "));
                 }
-                if(exceptions.Count>0)
+                if (string.IsNullOrEmpty(poco.Name))
                 {
-                    throw new AggregateException(exceptions);
+                    exceptions.Add(new ValidationException(901,
+                        $"Cannot be empty "));
                 }
             }
+            if (exceptions.Count > 0)
+            {
+                throw new AggregateException(exceptions);
+            }
         }
-
-        
     }
 }
+
