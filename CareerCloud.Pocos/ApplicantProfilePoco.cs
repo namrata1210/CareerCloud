@@ -36,5 +36,8 @@ namespace CareerCloud.Pocos
         public virtual SecurityLoginPoco SecurityLogin { get; set; }
         public virtual SystemCountryCodePoco SystemCountryCode { get; set; }
         public virtual ICollection<ApplicantResumePoco> ApplicantResumes { get; set; }
+        public virtual ICollection<ApplicantSkillPoco> ApplicantSkills { get; set; }
+        public virtual ICollection<ApplicantWorkHistoryPoco> ApplicantWorks { get; set; }
+        
     }
 }
