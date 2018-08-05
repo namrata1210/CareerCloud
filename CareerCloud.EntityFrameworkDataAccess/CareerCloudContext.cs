@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CareerCloud.EntityFrameworkDataAccess
 {
-    class CareerCloudContext:DbContext
+   public class CareerCloudContext:DbContext
     {
         public DbSet<ApplicantEducationPoco>ApplicantEducations { get; set; }
         public DbSet<ApplicantJobApplicationPoco> ApplicantJobApplications { get; set; }
@@ -30,6 +30,19 @@ namespace CareerCloud.EntityFrameworkDataAccess
         public DbSet<SystemCountryCodePoco> SystemCountryCodes { get; set; }
         public DbSet<SystemLanguageCodePoco> SystemLanguageCodes { get; set; }
 
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+
+            modelBuilder.Entity<ApplicantProfilePoco>()
+                .HasMany(e => e.ApplicantEducations)
+               .WithRequired(e => e.ApplicantProfile)
+               .HasForeignKey(e => e.Applicant)
+               .WillCascadeOnDelete(false);
+
+
+                modelBuilder.Entity<>
+            
+        }
 
         public CareerCloudContext():base("dbconnection")
         {
