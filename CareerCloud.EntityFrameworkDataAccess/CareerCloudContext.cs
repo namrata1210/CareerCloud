@@ -151,7 +151,7 @@ namespace CareerCloud.EntityFrameworkDataAccess
 
         }
 
-        public CareerCloudContext():base("dbconnection")
+        public CareerCloudContext():base(@"Data Source=JIGAR\HUMBERBRIDGING;Initial Catalog=JOB_PORTAL_DB;Integrated Security=True")
         {
 
         }
