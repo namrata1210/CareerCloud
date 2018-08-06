@@ -1,6 +1,7 @@
 ﻿using CareerCloud.Pocos;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,10 @@ namespace CareerCloud.EntityFrameworkDataAccess
 {
    public class CareerCloudContext:DbContext
     {
+        public CareerCloudContext() : base(ConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString)
+        {
+
+        }
         public DbSet<ApplicantEducationPoco>ApplicantEducations { get; set; }
         public DbSet<ApplicantJobApplicationPoco> ApplicantJobApplications { get; set; }
         public DbSet<ApplicantProfilePoco> ApplicantProfiles { get; set; }
@@ -151,9 +156,6 @@ namespace CareerCloud.EntityFrameworkDataAccess
 
         }
 
-        public CareerCloudContext():base(@"Data Source=JIGAR\HUMBERBRIDGING;Initial Catalog=JOB_PORTAL_DB;Integrated Security=True")
-        {
-
-        }
+        
     }
 }
