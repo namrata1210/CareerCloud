@@ -15,7 +15,7 @@ namespace CareerCloud.WCF
         [OperationContract]
         List<SystemCountryCodePoco> GetAllSystemCountryCode();
         [OperationContract]
-        SystemCountryCodePoco GetSingleSystemCountryCode(Guid Id);
+        SystemCountryCodePoco GetSingleSystemCountryCode(string Code);
         [OperationContract]
         void RemoveSystemCountryCode(SystemCountryCodePoco[] pocos);
         [OperationContract]
@@ -25,7 +25,7 @@ namespace CareerCloud.WCF
         [OperationContract]
         List<SystemLanguageCodePoco> GetAllSystemLanguageCode();
         [OperationContract]
-        SystemLanguageCodePoco GetSingleSystemLanguageCode(Guid Id);
+        SystemLanguageCodePoco GetSingleSystemLanguageCode(string LanguageId);
         [OperationContract]
         void RemoveSystemLanguageCode(SystemLanguageCodePoco[]pocos);
         [OperationContract]

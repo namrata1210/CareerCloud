@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CareerCloud.BusinessLogicLayer;
+using CareerCloud.EntityFrameworkDataAccess;
 using CareerCloud.Pocos;
 
 namespace CareerCloud.WCF
@@ -11,52 +13,77 @@ namespace CareerCloud.WCF
     {
         public void AddSystemCountryCode(SystemCountryCodePoco[] pocos)
         {
-            throw new NotImplementedException();
+            EFGenericRepository<SystemCountryCodePoco> repo = new EFGenericRepository<SystemCountryCodePoco>(false);
+            SystemCountryCodeLogic logic = new SystemCountryCodeLogic(repo);
+            logic.Add(pocos);
+
         }
 
         public void AddSystemLanguageCode(SystemLanguageCodePoco[] pocos)
         {
-            throw new NotImplementedException();
+            EFGenericRepository<SystemLanguageCodePoco> repo = new EFGenericRepository<SystemLanguageCodePoco>(false);
+            SystemLanguageCodeLogic logic = new SystemLanguageCodeLogic(repo);
+            logic.Add(pocos);
         }
 
         public List<SystemCountryCodePoco> GetAllSystemCountryCode()
         {
-            throw new NotImplementedException();
+            EFGenericRepository<SystemCountryCodePoco> repo = new EFGenericRepository<SystemCountryCodePoco>(false);
+            SystemCountryCodeLogic logic = new SystemCountryCodeLogic(repo);
+            return logic.GetAll();
         }
 
         public List<SystemLanguageCodePoco> GetAllSystemLanguageCode()
         {
-            throw new NotImplementedException();
+
+            EFGenericRepository<SystemLanguageCodePoco> repo = new EFGenericRepository<SystemLanguageCodePoco>(false);
+            SystemLanguageCodeLogic logic = new SystemLanguageCodeLogic(repo);
+            return logic.GetAll();
         }
 
-        public SystemCountryCodePoco GetSingleSystemCountryCode(Guid Id)
+        public SystemCountryCodePoco GetSingleSystemCountryCode(string Code)
         {
-            throw new NotImplementedException();
+            EFGenericRepository<SystemCountryCodePoco> repo = new EFGenericRepository<SystemCountryCodePoco>(false);
+            SystemCountryCodeLogic logic = new SystemCountryCodeLogic(repo);
+            return logic.Get(Code);
         }
 
-        public SystemLanguageCodePoco GetSingleSystemLanguageCode(Guid Id)
+        public SystemLanguageCodePoco GetSingleSystemLanguageCode(string LanguageId)
         {
-            throw new NotImplementedException();
+
+            EFGenericRepository<SystemLanguageCodePoco> repo = new EFGenericRepository<SystemLanguageCodePoco>(false);
+            SystemLanguageCodeLogic logic = new SystemLanguageCodeLogic(repo);
+            return logic.Get(LanguageId);
         }
 
         public void RemoveSystemCountryCode(SystemCountryCodePoco[] pocos)
         {
-            throw new NotImplementedException();
+            EFGenericRepository<SystemCountryCodePoco> repo = new EFGenericRepository<SystemCountryCodePoco>(false);
+            SystemCountryCodeLogic logic = new SystemCountryCodeLogic(repo);
+            logic.Delete(pocos);
         }
 
         public void RemoveSystemLanguageCode(SystemLanguageCodePoco[] pocos)
         {
-            throw new NotImplementedException();
+
+            EFGenericRepository<SystemLanguageCodePoco> repo = new EFGenericRepository<SystemLanguageCodePoco>(false);
+            SystemLanguageCodeLogic logic = new SystemLanguageCodeLogic(repo);
+            logic.Delete(pocos);
         }
 
         public void UpdateSystemCountryCode(SystemCountryCodePoco[] pocos)
         {
-            throw new NotImplementedException();
+            EFGenericRepository<SystemCountryCodePoco> repo = new EFGenericRepository<SystemCountryCodePoco>(false);
+            SystemCountryCodeLogic logic = new SystemCountryCodeLogic(repo);
+            logic.Update(pocos);
         }
 
         public void UpdateSystemLanguageCode(SystemLanguageCodePoco[] pocos)
         {
-            throw new NotImplementedException();
+
+            EFGenericRepository<SystemLanguageCodePoco> repo = new EFGenericRepository<SystemLanguageCodePoco>(false);
+            SystemLanguageCodeLogic logic = new SystemLanguageCodeLogic(repo);
+            logic.Update(pocos);
         }
     }
 }
