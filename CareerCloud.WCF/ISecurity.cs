@@ -15,7 +15,7 @@ namespace CareerCloud.WCF
         [OperationContract]
         List<SecurityLoginPoco> GetAllSecurityLogin();
         [OperationContract]
-        SecurityLoginPoco GetSingleSecurityLogin(Guid Id);
+        SecurityLoginPoco GetSingleSecurityLogin(string Id);
         [OperationContract]
         void RemoveSecurityLogin(SecurityLoginPoco[] pocos);
         [OperationContract]
@@ -25,7 +25,7 @@ namespace CareerCloud.WCF
         [OperationContract]
         List<SecurityLoginsLogPoco> GetAllSecuritysLoginLog();
         [OperationContract]
-        SecurityLoginsLogPoco GetSingleSecuritysLoginLog(Guid Id);
+        SecurityLoginsLogPoco GetSingleSecuritysLoginLog(string Id);
         [OperationContract]
         void RemoveSecurityLoginsLog(SecurityLoginsLogPoco[] pocos);
         [OperationContract]
@@ -35,7 +35,7 @@ namespace CareerCloud.WCF
         [OperationContract]
         List<SecurityLoginsRolePoco> GetAllSecurityLoginsRole();
         [OperationContract]
-        SecurityLoginsRolePoco GetSingleSecurityLoginsRole(Guid Id);
+        SecurityLoginsRolePoco GetSingleSecurityLoginsRole(string Id);
         [OperationContract]
         void RemoveSecurityLoginsRole(SecurityLoginsRolePoco[] pocos);
         [OperationContract]
@@ -45,7 +45,7 @@ namespace CareerCloud.WCF
         [OperationContract]
         List<SecurityRolePoco> GetSecurityRole();
         [OperationContract]
-        SecurityRolePoco GetSingleSecurityRole(Guid Id);
+        SecurityRolePoco GetSingleSecurityRole(string Id);
         [OperationContract]
         void RemoveSecurityRole(SecurityRolePoco[] pocos);
         [OperationContract]

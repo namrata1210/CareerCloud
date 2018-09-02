@@ -25,7 +25,7 @@ namespace CareerCloud.WCF
         [OperationContract]
         List<ApplicantJobApplicationPoco> GetAllApplicantJobApplication();
         [OperationContract]
-        ApplicantJobApplicationPoco GetSingleApplicantJobApplication(Guid Id);
+        ApplicantJobApplicationPoco GetSingleApplicantJobApplication(string Id);
         [OperationContract]
         void RemoveApplicantJobApplication(ApplicantJobApplicationPoco[] pocos);
         [OperationContract]
@@ -35,7 +35,7 @@ namespace CareerCloud.WCF
         [OperationContract]
         List<ApplicantProfilePoco> GetAllApplicantProfile();
         [OperationContract]
-        ApplicantProfilePoco GetSingleApplicantProfile(Guid Id);
+        ApplicantProfilePoco GetSingleApplicantProfile(string Id);
         [OperationContract]
         void RemoveApplicantProfile(ApplicantProfilePoco[] pocos);
         [OperationContract]
@@ -45,7 +45,7 @@ namespace CareerCloud.WCF
         [OperationContract]
         List<ApplicantResumePoco> GetAllApplicantResume();
         [OperationContract]
-        ApplicantResumePoco GetSingleApplicantResume(Guid Id);
+        ApplicantResumePoco GetSingleApplicantResume(string Id);
         [OperationContract]
         void RemoveApplicantResume(ApplicantResumePoco[] pocos);
         [OperationContract]
@@ -55,7 +55,7 @@ namespace CareerCloud.WCF
         [OperationContract]
         List<ApplicantSkillPoco> GetAllApplicantSkill();
         [OperationContract]
-        ApplicantSkillPoco GetSingleApplicantSkill(Guid Id);
+        ApplicantSkillPoco GetSingleApplicantSkill(string Id);
         [OperationContract]
         void RemoveApplicantSkill(ApplicantSkillPoco[] pocos);
         [OperationContract]
@@ -65,7 +65,7 @@ namespace CareerCloud.WCF
         [OperationContract]
         List<ApplicantWorkHistoryPoco> GetAllAppliccantWorkHistory();
         [OperationContract]
-        ApplicantWorkHistoryPoco GetSingleApplicantWorkHistory(Guid Id);
+        ApplicantWorkHistoryPoco GetSingleApplicantWorkHistory(string Id);
         [OperationContract]
         void RemoveApplicantWorkHistory(ApplicantWorkHistoryPoco[] pocos);
         [OperationContract]
