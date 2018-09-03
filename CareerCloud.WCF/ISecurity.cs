@@ -24,9 +24,9 @@ namespace CareerCloud.WCF
         [OperationContract]
         void AddSecurityLoginsLog(SecurityLoginsLogPoco[] pocos);
         [OperationContract]
-        List<SecurityLoginsLogPoco> GetAllSecuritysLoginLog();
+        List<SecurityLoginsLogPoco> GetAllSecurityLoginsLog();
         [OperationContract]
-        SecurityLoginsLogPoco GetSingleSecuritysLoginLog(string Id);
+        SecurityLoginsLogPoco GetSingleSecurityLoginsLog(string Id);
         [OperationContract]
         void RemoveSecurityLoginsLog(SecurityLoginsLogPoco[] pocos);
         [OperationContract]

@@ -76,7 +76,7 @@ namespace CareerCloud.WCF
         [OperationContract]
         List<CompanyProfilePoco> GetAllCompanyProfile();
         [OperationContract]
-        CompanyProfilePoco GetSingle(string Id);
+        CompanyProfilePoco GetSingleCompanyProfile(string Id);
         [OperationContract]
         void RemoveCompanyProfile(CompanyProfilePoco[] pocos);
         [OperationContract]

@@ -70,7 +70,7 @@ namespace CareerCloud.WCF
         [OperationContract]
         void RemoveApplicantWorkHistory(ApplicantWorkHistoryPoco[] pocos);
         [OperationContract]
-        void UpdateApplicantWorkHIstory(ApplicantWorkHistoryPoco[] pocos);
+        void UpdateApplicantWorkHistory(ApplicantWorkHistoryPoco[] pocos);
 
     }
 }

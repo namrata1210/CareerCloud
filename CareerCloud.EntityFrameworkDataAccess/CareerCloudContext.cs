@@ -13,7 +13,7 @@ namespace CareerCloud.EntityFrameworkDataAccess
     {
         public CareerCloudContext(bool createProxy=true) : base(ConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString)
         {
-
+            Configuration.ProxyCreationEnabled = createProxy;
         }
         public DbSet<ApplicantEducationPoco>ApplicantEducations { get; set; }
         public DbSet<ApplicantJobApplicationPoco> ApplicantJobApplications { get; set; }

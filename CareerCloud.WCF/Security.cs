@@ -55,7 +55,7 @@ namespace CareerCloud.WCF
             return logic.GetAll();
         }
 
-        public List<SecurityLoginsLogPoco> GetAllSecuritysLoginLog()
+        public List<SecurityLoginsLogPoco> GetAllSecurityLoginsLog()
         {
             EFGenericRepository<SecurityLoginsLogPoco> repo = new EFGenericRepository<SecurityLoginsLogPoco>(false);
             SecurityLoginsLogLogic logic = new SecurityLoginsLogLogic(repo);
@@ -90,7 +90,7 @@ namespace CareerCloud.WCF
             return logic.Get(Guid.Parse(Id));
         }
 
-        public SecurityLoginsLogPoco GetSingleSecuritysLoginLog(string Id)
+        public SecurityLoginsLogPoco GetSingleSecurityLoginsLog(string Id)
         {
             EFGenericRepository<SecurityLoginsLogPoco> repo = new EFGenericRepository<SecurityLoginsLogPoco>(false);
             SecurityLoginsLogLogic logic = new SecurityLoginsLogLogic(repo);

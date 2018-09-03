@@ -114,7 +114,7 @@ namespace CareerCloud.WCF
 
         }
 
-        public CompanyProfilePoco GetSingle(string Id)
+        public CompanyProfilePoco GetSingleCompanyProfile(string Id)
         {
             EFGenericRepository<CompanyProfilePoco> repo = new EFGenericRepository<CompanyProfilePoco>(false);
             CompanyProfileLogic logic = new CompanyProfileLogic(repo);

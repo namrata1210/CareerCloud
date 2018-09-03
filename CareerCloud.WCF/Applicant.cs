@@ -140,7 +140,7 @@ namespace CareerCloud.WCF
         public ApplicantWorkHistoryPoco GetSingleApplicantWorkHistory(string Id)
         {
 
-            EFGenericRepository<ApplicantWorkHistoryPoco> repo = new EFGenericRepository<ApplicantWorkHistoryPoco>();
+            EFGenericRepository<ApplicantWorkHistoryPoco> repo = new EFGenericRepository<ApplicantWorkHistoryPoco>(false);
             ApplicantWorkHistoryLogic logic = new ApplicantWorkHistoryLogic(repo);
             return logic.Get(Guid.Parse(Id));
         }
@@ -228,7 +228,7 @@ namespace CareerCloud.WCF
             logic.Update(pocos);
         }
 
-        public void UpdateApplicantWorkHIstory(ApplicantWorkHistoryPoco[] pocos)
+        public void UpdateApplicantWorkHistory(ApplicantWorkHistoryPoco[] pocos)
         {
 
             EFGenericRepository<ApplicantWorkHistoryPoco> repo = new EFGenericRepository<ApplicantWorkHistoryPoco>();
