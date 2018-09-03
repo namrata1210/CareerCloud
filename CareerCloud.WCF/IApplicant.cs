@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace CareerCloud.WCF
 {
+    [ServiceContract]
     interface IApplicant
     {
         [OperationContract]
@@ -15,7 +16,7 @@ namespace CareerCloud.WCF
         [OperationContract]
         List<ApplicantEducationPoco> GetAllApplicantEducation();
         [OperationContract]
-        ApplicantEducationPoco GetSingleApplicantEducation(Guid Id);
+        ApplicantEducationPoco GetSingleApplicantEducation(string Id);
         [OperationContract]
         void RemoveApplicantEducation(ApplicantEducationPoco[] pocos);
         [OperationContract]

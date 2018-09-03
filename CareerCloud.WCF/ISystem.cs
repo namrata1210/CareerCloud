@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace CareerCloud.WCF
 {
+    [ServiceContract]
     interface ISystem
     {
         [OperationContract]
