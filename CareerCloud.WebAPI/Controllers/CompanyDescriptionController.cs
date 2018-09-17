@@ -26,7 +26,7 @@ namespace CareerCloud.WebAPI.Controllers
         public IHttpActionResult GetCompanyDescription(Guid CompanyDescriptionId)
         {
             CompanyDescriptionPoco poco = _logic.Get(CompanyDescriptionId);
-            if (poco != null)
+            if (poco == null)
             {
                 return NotFound();
             }

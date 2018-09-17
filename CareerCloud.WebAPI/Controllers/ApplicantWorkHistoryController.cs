@@ -26,7 +26,7 @@ namespace CareerCloud.WebAPI.Controllers
         public IHttpActionResult GetApplicantWorkHistory(Guid ApplicantWorkHistoryId)
         {
             ApplicantWorkHistoryPoco poco = _logic.Get(ApplicantWorkHistoryId);
-            if (poco != null)
+            if (poco == null)
             {
                 return NotFound();
             }

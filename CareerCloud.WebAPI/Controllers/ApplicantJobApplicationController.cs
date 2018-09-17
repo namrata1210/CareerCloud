@@ -23,10 +23,10 @@ namespace CareerCloud.WebAPI.Controllers
         [HttpGet]
         [Route("education/{applicantjobapplicationId}")]
         [ResponseType(typeof(ApplicantJobApplicationPoco))]
-        public IHttpActionResult Getpplicantjobapplication(Guid applicantjobapplicationId)
+        public IHttpActionResult GetApplicantJobApplication(Guid applicantjobapplicationId)
         {
             ApplicantJobApplicationPoco poco = _logic.Get(applicantjobapplicationId);
-            if (poco != null)
+            if (poco == null)
             {
                 return NotFound();
             }

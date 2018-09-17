@@ -23,10 +23,10 @@ namespace CareerCloud.WebAPI.Controllers
         [HttpGet]
         [Route("education/{SystemLanguageCodeCode}")]
         [ResponseType(typeof(SystemLanguageCodePoco))]
-        public IHttpActionResult GetSystemLanguageCode(Guid SystemLanguageCodeCode)
+        public IHttpActionResult GetSystemLanguageCode(string SystemLanguageCodeCode)
         {
-            SystemLanguageCodePoco poco = _logic.Get(SystemLanguageCodeCode.ToString());
-            if (poco != null)
+            SystemLanguageCodePoco poco = _logic.Get(SystemLanguageCodeCode);
+            if (poco == null)
             {
                 return NotFound();
             }

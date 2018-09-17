@@ -23,10 +23,10 @@ namespace CareerCloud.WebAPI.Controllers
         [HttpGet]
         [Route("education/{SecurityLoginsLogId}")]
         [ResponseType(typeof(SecurityLoginsLogPoco))]
-        public IHttpActionResult GetSecurityLoginsLog(Guid SecurityLoginsLogId)
+        public IHttpActionResult GetSecurityLoginLog(Guid SecurityLoginsLogId)
         {
             SecurityLoginsLogPoco poco = _logic.Get(SecurityLoginsLogId);
-            if (poco != null)
+            if (poco == null)
             {
                 return NotFound();
             }
@@ -35,7 +35,7 @@ namespace CareerCloud.WebAPI.Controllers
         [HttpGet]
         [Route("education")]
         [ResponseType(typeof(List<SecurityLoginsLogPoco>))]
-        public IHttpActionResult GetallSecurityLoginsLog()
+        public IHttpActionResult GetallSecurityLoginLog()
         {
             List<SecurityLoginsLogPoco> result = _logic.GetAll();
             if (result == null)
@@ -46,7 +46,7 @@ namespace CareerCloud.WebAPI.Controllers
         }
         [HttpPost]
         [Route("education")]
-        public IHttpActionResult PostSecurityLoginsLog
+        public IHttpActionResult PostSecurityLoginLog
             ([FromBody] SecurityLoginsLogPoco[] pocos)
         {
             _logic.Add(pocos);
@@ -54,7 +54,7 @@ namespace CareerCloud.WebAPI.Controllers
         }
         [HttpPut]
         [Route("education")]
-        public IHttpActionResult PutSecurityLoginsLog
+        public IHttpActionResult PutSecurityLoginLog
             ([FromBody] SecurityLoginsLogPoco[] pocos)
         {
             _logic.Update(pocos);
@@ -62,7 +62,7 @@ namespace CareerCloud.WebAPI.Controllers
         }
         [HttpDelete]
         [Route("education")]
-        public IHttpActionResult DeleteSecurityLoginsLog
+        public IHttpActionResult DeleteSecurityLoginLog
             ([FromBody] SecurityLoginsLogPoco[] pocos)
         {
             _logic.Delete(pocos);

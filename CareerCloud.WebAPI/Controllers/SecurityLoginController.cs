@@ -26,7 +26,7 @@ namespace CareerCloud.WebAPI.Controllers
         public IHttpActionResult GetSecurityLogin(Guid SecurityLoginId)
         {
             SecurityLoginPoco poco = _logic.Get(SecurityLoginId);
-            if (poco != null)
+            if (poco == null)
             {
                 return NotFound();
             }

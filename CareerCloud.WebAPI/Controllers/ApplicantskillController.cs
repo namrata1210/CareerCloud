@@ -26,7 +26,7 @@ namespace CareerCloud.WebAPI.Controllers
         public IHttpActionResult GetApplicantSkill(Guid ApplicantSkillId)
         {
             ApplicantSkillPoco poco = _logic.Get(ApplicantSkillId);
-            if (poco != null)
+            if (poco == null)
             {
                 return NotFound();
             }
